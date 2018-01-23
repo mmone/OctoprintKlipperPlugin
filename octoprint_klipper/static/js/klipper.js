@@ -133,6 +133,6 @@ $(function() {
         dependencies: ["settingsViewModel", "loginStateViewModel", "connectionViewModel"],
 
         // elements this view model will be bound to.
-        elements: ["#tab_plugin_klipper", "#sidebar_plugin_klipper", "#settings_plugin_klipper"]
+        elements: ["#tab_plugin_klipper", "#sidebar_plugin_klipper", "#settings_plugin_klipper", "#navbar_plugin_klipper"]
     });
 });

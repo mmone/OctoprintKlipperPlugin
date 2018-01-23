@@ -1,5 +1,3 @@
-<label><span class="label label-success" data-bind="text: shortStatus">Connected</span></label>
-
 <label for="connection_printers" data-bind="css: {disabled: !connectionState.isErrorOrClosed()}, enable: connectionState.isErrorOrClosed() && loginState.isUser()">{{ _('Printer Profile') }}</label>
 <select id="connection_printers" data-bind="options: connectionState.printerOptions, optionsText: 'name', optionsValue: 'id', value: connectionState.selectedPrinter, css: {disabled: !connectionState.isErrorOrClosed()}, enable: connectionState.isErrorOrClosed() && loginState.isUser()"></select>
 <!--

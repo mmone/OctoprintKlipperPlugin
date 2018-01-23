@@ -4,7 +4,11 @@
   border: 1px solid #808080;
 }
 
-.plugin_klipper_msg {
+.plugin_klipper_log {
  overflow-y: scroll;
  height: 100%;
+}
+
+.plugin_klipper_log .error {
+   color: red;
 }

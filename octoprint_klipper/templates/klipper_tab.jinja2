@@ -1,8 +1,8 @@
 <div class="row-fluid">
   <div class="span8">
     <hr>
-    <div class="plugin_klipper_msg" data-bind="foreach: logMessages">
-      <div><i data-bind="text: time"></i> <span data-bind="text: msg"></span></div>
+    <div class="plugin_klipper_log" data-bind="foreach: logMessages">
+      <div><i data-bind="text: time"></i> <span data-bind="text: msg, css: type"></span></div>
     </div>
   </div>
   <div class="span4">

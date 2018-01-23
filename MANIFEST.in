@@ -1,0 +1,4 @@
+include README.md
+recursive-include octoprint_klipper/templates *
+recursive-include octoprint_klipper/translations *
+recursive-include octoprint_klipper/static *

@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span8">
+    <label>Log <span class="label label-success" data-bind="text: shortStatus">Connected</span> </label>
+    <hr>
+    <div class="plugin_klipper_msg" data-bind="foreach: logMessages">
+      <div><i data-bind="text: formatDate(time)"></i> <span data-bind="text: msg"></span></div>
+    </div>
+  </div>
+  <div class="span4">
+    <div>
+      <label>Process Management</label>
+      <button class="btn btn-block" data-bind="click: onGetStatus, enable: isActive()">Status</button>
+      <label>Restart</label>
+      <button class="btn btn-block" data-bind="click: onRestartHost, enable: isActive()"><i class="fa fa-repeat"></i> Host</button>
+      <button class="btn btn-block" data-bind="click: onRestartFirmware, enable: isActive()"><i class="fa fa-repeat"></i> MCU</button>
+      <button class="btn btn-block" data-bind="click: onClearLog"><i class="fa fa-trash"></i> Clear Log</button>
+    </div>
+    <hr>
+    <div>
+      <label>Macros</label>
+      <div data-bind="foreach: settings.settings.plugins.klipper.macros">
+        <button class="btn btn-block" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>
+      </div>
+    </div>
+  </div>
+</div>

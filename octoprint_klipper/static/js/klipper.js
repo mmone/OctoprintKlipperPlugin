@@ -13,19 +13,17 @@ $(function() {
         self.logMessages = ko.observableArray();
 
         self.onGetStatus = function() {
-           self.shortStatus("Update Status")
+           self.shortStatus("Updating Status ...")
            OctoPrint.control.sendGcode("Status")
         }
         
         self.onRestartFirmware = function() {
-           self.logMessage("Restarted Firmware");
-           self.shortStatus("Restarting Firmware");
+           self.shortStatus("Restarting Firmware ...");
            OctoPrint.control.sendGcode("FIRMWARE_RESTART")
         };
         
         self.onRestartHost = function() {
-           self.logMessage("Restarted Host");
-           self.shortStatus("Restarting Host");
+           self.shortStatus("Restarting Host ...");
            OctoPrint.control.sendGcode("RESTART")
         };
         

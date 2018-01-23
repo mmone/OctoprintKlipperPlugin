@@ -5,8 +5,12 @@
 }
 
 .plugin_klipper_log {
+   padding: 0.5em;
    overflow-y: scroll;
-   height: 100%;
+   height: 400px;
+   background-color: #efefef;
+   border: 1px #eee;
+   border-radius: 3px;
 }
 
 .plugin_klipper_log .log-item {

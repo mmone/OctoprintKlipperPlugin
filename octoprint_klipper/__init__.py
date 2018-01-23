@@ -11,15 +11,16 @@ class KlipperPlugin(
       octoprint.plugin.AssetPlugin):
    
    def on_after_startup(self):
-      #self._settings.set(["appearance"]["components"]["order"]["sidebar"]["test"]);
-      self._logger.info("startup hook ---------- {value} ----------".format(value=self._settings.get(["replace_connection_panel"])) )   
-   
+      pass
+      #self._logger.info("startup hook ---------- {value} ----------".format(value=self._settings.get(["replace_connection_panel"])) )
+      #self._settings.set(["appearance"]["components"]["order"]["sidebar"]["test"])
+      
    def get_settings_defaults(self):
       return dict(
          serialport="/tmp/printer",
          replace_connection_panel=True,
-         macros=[],
-         probePoints=[])
+         macros=[{'name':"Echo", 'macro':"ECHO"}],
+         probePoints=[{'x':0, 'y':0, 'z':0}])
        
    def get_template_configs(self):
       return [
@@ -47,17 +48,16 @@ class KlipperPlugin(
        self._plugin_manager.send_plugin_message(self._identifier, dict(type="error", message=error))
        
    def on_parse_gcode(self, comm, line, *args, **kwargs):
-      if "!!" in line:
-         self.logError(line.strip('!'))
+      if "//" in line:
+         self.parsingReturn = True
+         self.message = self.message + line.strip('/')
       else:
-         if "//" in line:
-             self.parsingReturn = True
-             self.message = self.message + line.strip('/')
-         else:
-           if self.parsingReturn:
+         if self.parsingReturn:
              self.parsingReturn = False
              self.logInfo(self.message)
              self.message = ""
+         if "!!" in line:
+             self.logError(line.strip('!'))
       return line
    
    def on_printer_action(self, comm, line, action, *args, **kwargs):

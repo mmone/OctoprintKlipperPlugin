@@ -53,16 +53,29 @@
       </div>
     </div>
     
- 
     <div class="control-group">
-      <h4>{{ _('Probe Points') }}</h4>
+      <h4>{{ _('Assisted Bed Leveling') }}</h4>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Probe Height</label>
+      <div class="controls">
+        <input type="text" class="input-block-level" data-bind="value: settings.settings.plugins.klipper.probeHeight">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Probe Lift</label>
+      <div class="controls">
+        <input type="text" class="input-block-level" data-bind="value: settings.settings.plugins.klipper.probeLift">
+      </div>
+    </div>    
+    <div class="control-group">
+      <h5>{{ _('Probe Points') }}</h5>
     </div>
     <div class="control-group">
       <div class="controls">
         <div class="row-fluid">
           <div class="span3">X</div>
           <div class="span3">Y</div>
-          <div class="span3">Z</div>
           <div class="span3"> </div>
         </div>
       </div>
@@ -73,7 +86,6 @@
            <div class="row-fluid">
               <div class="span3"><input type="text" class="input-block-level" data-bind="value: x"></div>
               <div class="span3"><input type="text" class="input-block-level" data-bind="value: y"></div>
-              <div class="span3"><input type="text" class="input-block-level" data-bind="value: z"></div>
               <div class="span3">
                  <a href='#' data-bind='click: $parent.moveProbePointUp' class="fa fa-sort-asc"></a>
                  <a href='#' data-bind='click: $parent.moveProbePointDown' class="fa fa-sort-desc"></a>

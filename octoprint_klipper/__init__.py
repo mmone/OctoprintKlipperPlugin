@@ -21,7 +21,9 @@ class KlipperPlugin(
          serialport="/tmp/printer",
          replace_connection_panel=True,
          macros=[{'name':"Echo", 'macro':"ECHO"}],
-         probePoints=[{'x':0, 'y':0, 'z':0}])
+         probeHeight=0,
+         probeLift=0,
+         probePoints=[{'x':0, 'y':0}])
        
    def get_template_configs(self):
       return [

@@ -36,26 +36,36 @@ class KlipperPlugin(
          css=["css/klipper.css"],
          less=["css/klipper.less"]
       )
-
+   
+   parsingReturn = False
+   message = ""
+   
+   def logInfo(self, message):
+       self._plugin_manager.send_plugin_message(self._identifier, dict(type="info", message=message))
+   
+   def logError(self, error):
+       self._plugin_manager.send_plugin_message(self._identifier, dict(type="error", message=error))
+       
    def on_parse_gcode(self, comm, line, *args, **kwargs):
-      if "ok" not in line:
-         return line
-         
-      self._plugin_manager.send_plugin_message(self._identifier, dict(message=line))
-      #from octoprint.util.comm import parse_firmware_line
-      
-      # Create a dict with all the keys/values returned by the M115 request
-      #printer_data = parse_firmware_line(line)
-      self._logger.info("Machine type detected {line}.".format(line=line))
-      #self._logger.info("Machine type detected: {machine}.".format(machine=printer_data["MACHINE_TYPE"]))
-      
+      if "!!" in line:
+         self.logError(line.strip('!'))
+      else:
+         if "//" in line:
+             self.parsingReturn = True
+             self.message = self.message + line.strip('/')
+         else:
+           if self.parsingReturn:
+             self.parsingReturn = False
+             self.logInfo(self.message)
+             self.message = ""
       return line
    
    def on_printer_action(self, comm, line, action, *args, **kwargs):
       #if not action == "custom":
       #    return
-      
-      self._logger.info("action recieved:".action)
+      self._plugin_manager.send_plugin_message(self._identifier, dict(message=line))
+      self._plugin_manager.send_plugin_message(self._identifier, dict(message=action))
+      #self._logger.info("action recieved:".action)
 
 __plugin_name__ = "Klipper"
 

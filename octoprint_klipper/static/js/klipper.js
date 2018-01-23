@@ -22,35 +22,34 @@ $(function() {
         
         self.onGetStatus = function() {
            self.shortStatus("Update Status")
+           OctoPrint.control.sendGcode("Status")
         }
         
         self.onRestartFirmware = function() {
-            //OctoPrint.control.sendGcode("FIRMWARE_RESTART")
+           self.logMessage("Restarted Firmware");
            self.shortStatus("Restarting Firmware");
-           console.log("Restart firmware");
+           OctoPrint.control.sendGcode("FIRMWARE_RESTART")
         };
         
         self.onRestartHost = function() {
-           
-           self.shortStatus("Restarting Host");
-           console.log("Restart Host");
            self.logMessage("Restarted Host");
-            //OctoPrint.control.sendGcode("RESTART")
+           self.shortStatus("Restarting Host");
+           OctoPrint.control.sendGcode("RESTART")
         };
         
         self.onBeforeBinding = function() {
-           self.connectionState.selectedPort("VIRTUAL");
+           //self.connectionState.selectedPort("VIRTUAL");
         }
         
         self.onAfterBinding = function() {
-           self.connectionState.selectedPort("VIRTUAL");
+           self.connectionState.selectedPort(self.settings.settings.plugins.klipper.serialport());
            console.log(self.connectionState.selectedPort());
            self.shortStatus("Idle");
         }
         
         self.onDataUpdaterPluginMessage = function(plugin, message) {
            //console.log(message);
-           self.logMessage("plugin: " +plugin+ " message recieved: " + message["message"]);
+           self.logMessage(message["message"]);
         }
 
         self.logMessage = function(message) {

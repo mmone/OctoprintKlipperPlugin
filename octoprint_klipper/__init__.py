@@ -27,6 +27,7 @@ class KlipperPlugin(
       return [
            dict(type="navbar", custom_bindings=True),
            dict(type="settings", custom_bindings=True),
+           dict(type="wizard", custom_bindings=True),
            dict(type="sidebar",
                  custom_bindings=True,
                  replaces= "connection" if self._settings.get(["replace_connection_panel"]) else "")

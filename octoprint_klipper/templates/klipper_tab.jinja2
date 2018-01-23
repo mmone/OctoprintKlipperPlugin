@@ -3,7 +3,7 @@
     <label>Log <span class="label label-success" data-bind="text: shortStatus">Connected</span> </label>
     <hr>
     <div class="plugin_klipper_msg" data-bind="foreach: logMessages">
-      <div><i data-bind="text: formatDate(time)"></i> <span data-bind="text: msg"></span></div>
+      <div><i data-bind="text: time"></i> <span data-bind="text: msg"></span></div>
     </div>
   </div>
   <div class="span4">
@@ -13,7 +13,8 @@
       <label>Restart</label>
       <button class="btn btn-block" data-bind="click: onRestartHost, enable: isActive()"><i class="fa fa-repeat"></i> Host</button>
       <button class="btn btn-block" data-bind="click: onRestartFirmware, enable: isActive()"><i class="fa fa-repeat"></i> MCU</button>
-      <button class="btn btn-block" data-bind="click: onClearLog"><i class="fa fa-trash"></i> Clear Log</button>
+      <label>Log</label>
+      <button class="btn btn-block" data-bind="click: onClearLog"><i class="fa fa-trash"></i> Clear</button>
     </div>
     <hr>
     <div>

@@ -1,5 +1,6 @@
 # coding=utf-8
 from __future__ import absolute_import
+import datetime
 import logging
 import octoprint.plugin
 import octoprint.plugin.core
@@ -42,10 +43,21 @@ class KlipperPlugin(
    message = ""
    
    def logInfo(self, message):
-       self._plugin_manager.send_plugin_message(self._identifier, dict(type="info", message=message))
+       self._plugin_manager.send_plugin_message(
+                self._identifier,
+                dict(
+                        time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        type="info", message=message)
+                    )
    
    def logError(self, error):
-       self._plugin_manager.send_plugin_message(self._identifier, dict(type="error", message=error))
+       self._plugin_manager.send_plugin_message(
+               self._identifier,
+               dict(
+                       time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                       type="error",
+                       message=error)
+                    )
        
    def on_parse_gcode(self, comm, line, *args, **kwargs):
       if "//" in line:

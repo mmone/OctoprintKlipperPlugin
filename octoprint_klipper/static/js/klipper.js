@@ -11,15 +11,7 @@ $(function() {
         self.shortStatus = ko.observable();
         
         self.logMessages = ko.observableArray();
-        /*
-        self.onConnectToHost = function() {
-           console.log("Connecting");
-           self.shortStatus("Connecting to Host");
-           OctoPrint.connection.connect({"port" : "VIRTUAL"});
-           self.connectButtonText("Disconnect");
-           console.log(self.loginState);
-        }*/
-        
+
         self.onGetStatus = function() {
            self.shortStatus("Update Status")
            OctoPrint.control.sendGcode("Status")
@@ -49,11 +41,11 @@ $(function() {
         
         self.onDataUpdaterPluginMessage = function(plugin, message) {
            //console.log(message);
-           self.logMessage(message["message"]);
+           self.logMessage(message["time"], message["type"], message["message"]);
         }
 
-        self.logMessage = function(message) {
-           self.logMessages.push({time: Date.now(), msg: message});
+        self.logMessage = function(timestamp, type, message) {
+           self.logMessages.push({time: timestamp, type: type, msg: message});
         }
         
         self.onClearLog = function() {

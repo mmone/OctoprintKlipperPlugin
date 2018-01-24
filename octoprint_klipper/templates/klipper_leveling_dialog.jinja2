@@ -1,1 +1,24 @@
-test
+<div id="klipper_leveling_dialog" class="modal hide fade small" tabindex="-1" role="dialog" aria-labelledby="leveling_dialog_label" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 id="leveling_dialog_label">Assisted Bed Leveling</h3>
+    </div>
+    <div class="modal-body">
+       <div class="row-fluid">
+          <div class="span3">
+             <button class="btn btn-block" data-bind="click: startLeveling">Start</button>
+             <button class="btn btn-block" data-bind="click: previousPoint, enable: (activePoint() > 0)">Previous</button>
+             <button class="btn btn-block" data-bind="click: nextPoint, enable: (activePoint() < pointCount()-1)">Next</button>
+             <button class="btn btn-block" data-bind="click: stopLeveling" data-dismiss="modal">Close</button>
+          </div>
+          <div class="span8">
+             <div data-bind="foreach: settings.settings.plugins.klipper.probePoints" >
+                <div class="row-fluid">
+                   <div class="span1"><i class="fa fa-arrow-right" data-bind="visible: ($index()==$parent.activePoint())"></i></div>
+                   <div class="span9">[<span data-bind="text: x"></span>,<span data-bind="text: y"></span>]</div>
+                </div>
+            </div>
+          </div>
+       </div>
+   </div>
+</div>

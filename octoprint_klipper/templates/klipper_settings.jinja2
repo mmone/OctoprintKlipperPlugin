@@ -14,8 +14,6 @@
             <input type="checkbox" class="input-block-level" data-bind="checked: settings.settings.plugins.klipper.replace_connection_panel">
         </div>
     </div>
-    
-    
     <div class="control-group">
       <h4>{{ _('Macros') }}<h4>
     </div>
@@ -49,7 +47,7 @@
     </div>
     <div class="control-group">
       <div class="controls">
-        <a href='#' data-bind='click: addMacro' class="fa fa-plus-circle"></a>
+        <a href='#' data-bind='click: addMacro' class="fa fa-plus-circle"></a> Add Macro
       </div>
     </div>
     
@@ -57,37 +55,49 @@
       <h4>{{ _('Assisted Bed Leveling') }}</h4>
     </div>
     <div class="control-group">
-      <label class="control-label">Probe Height</label>
+      <label class="control-label">{{ _('Probe Height') }}</label>
       <div class="controls">
-        <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeHeight">
+         <div class="input-append">
+            <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeHeight">
+            <span class="add-on">mm</span>
+         </div>
+         <span class="help-inline">Z-height to probe at.</span>
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label">Probe Lift</label>
+      <label class="control-label">{{ _('Probe Lift') }}</label>
       <div class="controls">
-        <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeLift">
+         <div class="input-append">
+           <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeLift">
+           <span class="add-on">mm</span>
+         </div>
+         <span class="help-inline">Lift Z before moving to next point.</span>
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label">Probe Speed XY</label>
+      <label class="control-label">{{ _('Probe Feedrate Z') }}</label>
       <div class="controls">
-        <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeSpeedXy">
+         <div class="input-append">
+           <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeSpeedZ">
+           <span class="add-on">mm/min</span>
+         </div>
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label">Probe Speed Z</label>
+      <label class="control-label">{{ _('Feedrate X/Y') }}</label>
       <div class="controls">
-        <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeSpeedZ">
+         <div class="input-append">
+           <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeSpeedXy">
+           <span class="add-on">mm/min</span>
+         </div>
       </div>
     </div>
     <div class="control-group">
       <h5>{{ _('Probe Points') }}</h5>
-    </div>
-    <div class="control-group">
       <div class="controls">
         <div class="row-fluid">
-          <div class="span3">X</div>
-          <div class="span3">Y</div>
+          <div class="span3">X(mm)</div>
+          <div class="span3">Y(mm)</div>
           <div class="span3"> </div>
         </div>
       </div>
@@ -99,8 +109,8 @@
               <div class="span3"><input type="text" class="input-block-level" data-bind="value: x"></div>
               <div class="span3"><input type="text" class="input-block-level" data-bind="value: y"></div>
               <div class="span3">
-                 <a href='#' data-bind='click: $parent.moveProbePointUp' class="fa fa-sort-asc"></a>
-                 <a href='#' data-bind='click: $parent.moveProbePointDown' class="fa fa-sort-desc"></a>
+                 <a href='#' data-bind='click: $parent.moveProbePointUp' class="fa fa-chevron-up"></a>
+                 <a href='#' data-bind='click: $parent.moveProbePointDown' class="fa fa-chevron-down"></a>
                  <a href='#' data-bind='click: $parent.removeProbePoint' class="fa fa-trash-o"></a>
               </div>
            </div>
@@ -108,7 +118,7 @@
    </div>
    <div class="control-group">
      <div class="controls">
-       <a href='#' data-bind='click: addProbePoint' class="fa fa-plus-circle"></a>
+       <a href='#' data-bind='click: addProbePoint' class="fa fa-plus-circle"></a> Add Point
      </div>
    </div>
 </form>

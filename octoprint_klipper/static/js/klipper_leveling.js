@@ -19,6 +19,7 @@ $(function() {
         
         self.stopLeveling = function() {
            self.activePoint(-1);
+           OctoPrint.control.sendGcode("G1 Z" + self.settings.settings.plugins.klipper.probeHeight() + self.settings.settings.plugins.klipper.probeLift());
            OctoPrint.control.sendGcode("G28")
         }
         
@@ -37,7 +38,7 @@ $(function() {
         }
         
         self.moveToPoint = function(index) {
-           var point = self.settings.settings.plugins.klipper.probePoints()[0];
+           var point = self.settings.settings.plugins.klipper.probePoints()[index];
 
            OctoPrint.control.sendGcode("G1 Z" + self.settings.settings.plugins.klipper.probeHeight() + self.settings.settings.plugins.klipper.probeLift());
            OctoPrint.control.sendGcode("G1 X" + point.x() + " Y" + point.y());

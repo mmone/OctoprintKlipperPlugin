@@ -24,6 +24,8 @@ class KlipperPlugin(
          macros=[{'name':"Echo", 'macro':"ECHO"}],
          probeHeight=0,
          probeLift=5,
+         probeSpeedXy=800,
+         probeSpeedZ=500,
          probePoints=[{'x':0, 'y':0}])
        
    def get_template_configs(self):

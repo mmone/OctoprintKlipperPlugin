@@ -1,8 +1,13 @@
 # OctoPrint Klipper Plugin
 
 This plugin assists in managing and monitoring the [Klipper](https://github.com/KevinOConnor/klipper) 3D printer firmware.
-Besides that it provides some usefull tools.
 
+### Features
+- Simplified connection dialog.
+- Restart Host and MCU processes.
+- User defineable macro buttons.
+- Assisted bed leveling wizard with user definable probe points.
+- PID Tuning Dialog.
 
 **STILL UNDER DEVELOPMENT**
 
@@ -16,4 +21,4 @@ or manually using this URL:
 
 ## Configuration
 
-Click on the wrench icon in the titlebar and select "Klipper" to get to the available settings for this plugin.
+Click on the wrench icon in the titlebar to open OctoPrints settings dialog. Select "Klipper" at the bottom of the settings dialog.

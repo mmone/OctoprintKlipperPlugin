@@ -14,6 +14,7 @@ $(function() {
         self.startLeveling = function() {
            self.activePoint(0);
            OctoPrint.control.sendGcode("G28")
+           self.moveToPoint(self.activePoint);
         }
         
         self.stopLeveling = function() {
@@ -28,6 +29,7 @@ $(function() {
         
         self.previousPoint = function() {
            self.activePoint(self.activePoint()-1);
+           self.moveToPoint(self.activePoint);
         }
         
         self.pointCount = function() {

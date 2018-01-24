@@ -4,6 +4,7 @@
     <div class="plugin_klipper_log" data-bind="foreach: logMessages">
       <div class="log-item"><i data-bind="text: time"></i> <span data-bind="text: msg, css: type"></span></div>
     </div>
+    <a href="#" data-bind="click: onClearLog" class="fa fa-trash" alt="Clear"></a>
   </div>
   <div class="span4">
     <div>
@@ -12,8 +13,9 @@
       <label>Restart</label>
       <button class="btn btn-block" data-bind="click: onRestartHost, enable: isActive()"><i class="fa fa-repeat"></i> Host</button>
       <button class="btn btn-block" data-bind="click: onRestartFirmware, enable: isActive()"><i class="fa fa-repeat"></i> MCU</button>
-      <label>Log</label>
-      <button class="btn btn-block" data-bind="click: onClearLog"><i class="fa fa-trash"></i> Clear</button>
+      <label>Tools</label>
+      <button class="btn btn-block" data-bind="click: showLevelingDialog, enable: isActive()">Assisted Bed Leveling</button>
+      <button class="btn btn-block" data-bind="click: showPidTuningDialog, enable: isActive()">PID Tuning</button>
     </div>
     <hr>
     <div>

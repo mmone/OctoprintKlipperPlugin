@@ -9,7 +9,8 @@ class KlipperPlugin(
       octoprint.plugin.StartupPlugin,
       octoprint.plugin.TemplatePlugin,
       octoprint.plugin.SettingsPlugin,
-      octoprint.plugin.AssetPlugin):
+      octoprint.plugin.AssetPlugin,
+      octoprint.plugin.WizardPlugin):
    
    def on_after_startup(self):
       pass
@@ -22,14 +23,16 @@ class KlipperPlugin(
          replace_connection_panel=True,
          macros=[{'name':"Echo", 'macro':"ECHO"}],
          probeHeight=0,
-         probeLift=0,
+         probeLift=5,
          probePoints=[{'x':0, 'y':0}])
        
    def get_template_configs(self):
       return [
            dict(type="navbar", custom_bindings=True),
            dict(type="settings", custom_bindings=True),
-           dict(type="wizard", custom_bindings=True),
+           dict(type="generic", name="Assisted Bed Leveling", template="klipper_leveling_dialog.jinja2", custom_bindings=True),
+           dict(type="generic", name="PID Tuning", template="klipper_pid_tuning_dialog.jinja2", custom_bindings=True),           
+           dict(type="tab", name="Klipper", template="klipper_tab_main.jinja2", suffix="_main", custom_bindings=True),
            dict(type="sidebar",
                  custom_bindings=True,
                  replaces= "connection" if self._settings.get(["replace_connection_panel"]) else "")
@@ -37,7 +40,10 @@ class KlipperPlugin(
    
    def get_assets(self):
       return dict(
-         js=["js/klipper.js"],
+         js=["js/klipper.js",
+              "js/klipper_settings.js",
+              "js/klipper_leveling.js",
+              "js/klipper_pid_tuning.js"],
          css=["css/klipper.css"],
          less=["css/klipper.less"]
       )
@@ -81,6 +87,9 @@ class KlipperPlugin(
       self._plugin_manager.send_plugin_message(self._identifier, dict(message=line))
       self._plugin_manager.send_plugin_message(self._identifier, dict(message=action))
       #self._logger.info("action recieved:".action)
+      
+   def is_wizard_required(self):
+       return True;
 
 __plugin_name__ = "Klipper"
 

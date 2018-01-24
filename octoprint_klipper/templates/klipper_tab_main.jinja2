@@ -25,10 +25,12 @@
          <button class="btn btn-block" data-bind="click: showPidTuningDialog, enable: isActive()">PID Tuning</button>
      </div>
      <div class="controls">
-          <hr>
+         <hr>
          <label class="control-label">Macros</label>
          <div data-bind="foreach: settings.settings.plugins.klipper.macros">
+            <!-- ko if: tab -->
             <button class="btn btn-block" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>
+            <!-- /ko -->
          </div>
      </div>
     </div>

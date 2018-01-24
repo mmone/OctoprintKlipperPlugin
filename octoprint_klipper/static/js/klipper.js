@@ -48,7 +48,6 @@ $(function() {
         
         self.onAfterBinding = function() {
            self.connectionState.selectedPort(self.settings.settings.plugins.klipper.serialport());
-           console.log(self.connectionState.selectedPort());
            self.shortStatus("Idle");
         }
         

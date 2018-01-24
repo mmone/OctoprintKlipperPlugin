@@ -4,7 +4,12 @@ $(function() {
         self.settings = parameters[0];
 
         self.addMacro = function() {
-           self.settings.settings.plugins.klipper.macros.push({name: 'Macro', macro: ''});
+           self.settings.settings.plugins.klipper.macros.push({
+              name: 'Macro',
+              macro: '',
+              sidebar: true,
+              tab: true
+           });
         }
         
         self.removeMacro = function(macro) {

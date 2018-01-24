@@ -14,13 +14,28 @@
     <div class="control-group">
       <h4>{{ _('Macros') }}<h4>
     </div>
+    <div class="control-group">
+       <div class="controls">
+          <div class="row-fluid">
+            <div class="span8" style="text-align: right"><small>Add macro button to:</small></div>
+            <div class="span1"><small>Klipper Tab</small></div>
+            <div class="span2"><small>Sidebar</small></div>
+          </div>
+       </div>
+    </div>
     <div data-bind="foreach: settings.settings.plugins.klipper.macros">   
        <div class="control-group">
            <label class="control-label">{{ _('Name') }}</label>
            <div class="controls">
                 <div class="row-fluid">
-                  <div class="span9">
-                    <input type="text" class="input-block-level" data-bind="value: name">
+                  <div class="span8">
+                    <input type="text" class="input-block-level" data-bind="value: name"/>
+                  </div>
+                  <div class="span1">
+                    <input type="checkbox" class="input-block-level" data-bind="checked: tab"/>
+                  </div>
+                  <div class="span1">
+                    <input type="checkbox" class="input-block-level" data-bind="checked: sidebar"/>
                   </div>
                   <div class="span2">
                      <a href='#' data-bind='click: $parent.moveMacroUp' class="fa fa-chevron-up"></a>
@@ -28,12 +43,11 @@
                      <a href='#' data-bind='click: $parent.removeMacro' class="fa fa-trash-o"></a>
                   </div>
                 </div>
-              
            </div>
            <label class="control-label">{{ _('GCODE') }}</label>
            <div class="controls">
                <div class="row-fluid">
-                 <div class="span9">
+                 <div class="span8">
                     <textarea rows="4" class="block" data-bind="value: macro">
                     </textarea>
                  </div>

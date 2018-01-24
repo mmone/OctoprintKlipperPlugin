@@ -14,6 +14,8 @@
     <div>
       <label>Macros</label>
       <div data-bind="foreach: settings.settings.plugins.klipper.macros">
+        <!-- ko if: sidebar -->
         <button class="btn btn-block" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>
+        <!-- /ko -->
       </div>
     </div>

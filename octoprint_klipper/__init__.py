@@ -21,7 +21,7 @@ class KlipperPlugin(
       return dict(
          serialport="/tmp/printer",
          replace_connection_panel=True,
-         macros=[{'name':"Echo", 'macro':"ECHO"}],
+         macros=[{'name':"Echo", 'macro':"ECHO", 'sidebar':True, 'tab':True}],
          probeHeight=0,
          probeLift=5,
          probeSpeedXy=1500,

@@ -1,0 +1,26 @@
+<div id="klipper_pid_tuning_dialog" class="modal hide fade small" tabindex="-1" role="dialog" aria-labelledby="klipper_pid_tuning_dialog_label" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 id="klipper_pid_tuning_dialog_label">PID Tuning</h3>
+    </div>
+    <div class="modal-body">
+       <div class="control-group">
+         <label class="control-label">Heater Index</label>
+         <div class="controls">
+           <input type="text" class="input-block-level span3" data-bind="value: heaterIndex">
+         </div>
+       </div>
+       <div class="control-group">
+         <label class="control-label">Target Temperature</label>
+         <div class="controls">
+           <input type="text" class="input-block-level span3" data-bind="value: targetTemperature">
+         </div>
+       </div>
+       <label class="control-label">The result of the tuning cycle is reported in the terminal.</label>
+       <div class="control-group">
+         <div class="controls">
+             <button class="btn btn-block" data-bind="click: startTuning" data-dismiss="modal">Start Tuning</button>
+         </div>
+       </div>
+   </div>
+</div>

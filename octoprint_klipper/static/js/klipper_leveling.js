@@ -58,6 +58,6 @@ $(function() {
     OCTOPRINT_VIEWMODELS.push({
         construct: KlipperLevelingViewModel,
         dependencies: ["settingsViewModel", "loginStateViewModel", "connectionViewModel"],
-        elements: ["#tab_plugin_klipper_leveling", "#klipper_leveling_dialog"]
+        elements: ["#klipper_leveling_dialog"]
     });
 });

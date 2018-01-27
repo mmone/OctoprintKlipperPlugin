@@ -42,17 +42,12 @@ $(function() {
            OctoPrint.control.sendGcode("RESTART")
         };
         
-        self.onBeforeBinding = function() {
-           //self.connectionState.selectedPort("VIRTUAL");
-        }
-        
         self.onAfterBinding = function() {
            self.connectionState.selectedPort(self.settings.settings.plugins.klipper.serialport());
            self.shortStatus("Idle");
         }
         
         self.onDataUpdaterPluginMessage = function(plugin, message) {
-           //console.log(message);
            self.logMessage(message["time"], message["type"], message["message"]);
         }
 

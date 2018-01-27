@@ -14,8 +14,6 @@ class KlipperPlugin(
    
    def on_after_startup(self):
       pass
-      #self._logger.info("startup hook ---------- {value} ----------".format(value=self._settings.get(["replace_connection_panel"])) )
-      #self._settings.set(["appearance"]["components"]["order"]["sidebar"]["test"])
       
    def get_settings_defaults(self):
       return dict(
@@ -30,7 +28,7 @@ class KlipperPlugin(
        
    def get_template_configs(self):
       return [
-           dict(type="navbar", custom_bindings=True),
+#           dict(type="navbar", custom_bindings=True),
            dict(type="settings", custom_bindings=True),
            dict(type="generic", name="Assisted Bed Leveling", template="klipper_leveling_dialog.jinja2", custom_bindings=True),
            dict(type="generic", name="PID Tuning", template="klipper_pid_tuning_dialog.jinja2", custom_bindings=True),           
@@ -82,13 +80,6 @@ class KlipperPlugin(
          if "!!" in line:
              self.logError(line.strip('!'))
       return line
-   
-   def on_printer_action(self, comm, line, action, *args, **kwargs):
-      #if not action == "custom":
-      #    return
-      self._plugin_manager.send_plugin_message(self._identifier, dict(message=line))
-      self._plugin_manager.send_plugin_message(self._identifier, dict(message=action))
-      #self._logger.info("action recieved:".action)
       
    def is_wizard_required(self):
        return True;
@@ -104,7 +95,4 @@ def __plugin_load__():
       "octoprint.comm.protocol.gcode.received": __plugin_implementation__.on_parse_gcode,
       "octoprint.comm.protocol.action": __plugin_implementation__.on_printer_action
    }
-
-#__plugin_name__ = "Klipper"
-#__plugin_implementation__ = KlipperPlugin()
 

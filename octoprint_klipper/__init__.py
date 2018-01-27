@@ -93,6 +93,5 @@ def __plugin_load__():
    __plugin_implementation__ = KlipperPlugin()
    __plugin_hooks__ = {
       "octoprint.comm.protocol.gcode.received": __plugin_implementation__.on_parse_gcode,
-      "octoprint.comm.protocol.action": __plugin_implementation__.on_printer_action
    }
 

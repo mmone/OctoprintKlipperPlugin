@@ -1,14 +1,6 @@
 <label for="connection_printers" data-bind="css: {disabled: !connectionState.isErrorOrClosed()}, enable: connectionState.isErrorOrClosed() && loginState.isUser()">{{ _('Printer Profile') }}</label>
 <select id="connection_printers" data-bind="options: connectionState.printerOptions, optionsText: 'name', optionsValue: 'id', value: connectionState.selectedPrinter, css: {disabled: !connectionState.isErrorOrClosed()}, enable: connectionState.isErrorOrClosed() && loginState.isUser()"></select>
-<!--
-<label class="checkbox">
-    <input type="checkbox" id="connection_save" data-bind="checked: connectionState.saveSettings, css: {disabled: !connectionState.isErrorOrClosed()}, enable: connectionState.isErrorOrClosed() && loginState.isUser()"> {{ _('Save connection settings') }}
-</label>
 
-<label class="checkbox">
-    <input type="checkbox" id="connection_autoconnect" data-bind="checked: settings.serial_autoconnect, css: {disabled: !connectionState.isErrorOrClosed()}, enable: connectionState.isErrorOrClosed() && loginState.isUser()"> {{ _('Auto-connect on server startup') }}
-</label>
--->
 <button class="btn btn-block" data-bind="click: connectionState.connect, text: connectionState.buttonText(), enable: loginState.isUser()">{{ _('Connect') }}</button>
 <hr>
     <div>

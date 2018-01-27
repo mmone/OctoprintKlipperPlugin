@@ -8,8 +8,14 @@ This plugin assists in managing and monitoring the [Klipper](https://github.com/
 - User defineable macro buttons.
 - Assisted bed leveling wizard with user definable probe points.
 - PID Tuning Dialog.
+- Message log displaying messages from Klipper prepended with "//" and "!!".
 
-**STILL UNDER DEVELOPMENT**
+### Status
+Usable
+
+### ToDo
+- On first install automatically check/add virtual serialport as descriped [here](https://github.com/KevinOConnor/klipper/blob/master/docs/Installation.md#configuring-octoprint-to-use-klipper) in the klipper docs. You need to do this manually for now if you haven't already.
+- Add a continously updated status display in octoprints navbar.
 
 ## Setup
 

@@ -11,7 +11,7 @@ $(function() {
         }
         
         self.startTuning = function() {
-           OctoPrint.control.sendGcode("PID_TUNE E" + self.heaterIndex() + " S" + self.targetTemperature());
+           OctoPrint.control.sendGcode("M303 E" + self.heaterIndex() + " S" + self.targetTemperature());
         }
     }
 

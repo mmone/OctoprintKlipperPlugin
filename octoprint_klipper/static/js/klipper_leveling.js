@@ -12,46 +12,58 @@ $(function() {
         }
         
         self.startLeveling = function() {
-           self.activePoint(0);
            OctoPrint.control.sendGcode("G28")
-           self.moveToPoint(self.activePoint());
+           self.moveToPoint(0);
         }
         
         self.stopLeveling = function() {
            self.activePoint(-1);
-           OctoPrint.control.sendGcode("G1 Z" + (self.settings.settings.plugins.klipper.probeHeight()*1 + self.settings.settings.plugins.klipper.probeLift()*1));
+           OctoPrint.control.sendGcode("G1 Z" +
+              (self.settings.settings.plugins.klipper.probeHeight()*1 +
+               self.settings.settings.plugins.klipper.probeLift()*1)
+           );
            OctoPrint.control.sendGcode("G28")
         }
         
         self.nextPoint = function() {
-           self.activePoint(self.activePoint()+1);
-           self.moveToPoint(self.activePoint());
+           self.moveToPoint(self.activePoint()+1);
         }
         
         self.previousPoint = function() {
-           self.activePoint(self.activePoint()-1);
-           self.moveToPoint(self.activePoint());
+           self.moveToPoint(self.activePoint()-1);
+        }
+        
+        self.jumpToPoint = function(item) {
+           self.moveToPoint(
+              self.settings.settings.plugins.klipper.probePoints().indexOf(item)
+           );
         }
         
         self.pointCount = function() {
            return self.settings.settings.plugins.klipper.probePoints().length;
         }
         
-        self.moveToPoint = function(index) {
-           var point = self.settings.settings.plugins.klipper.probePoints()[index];
-
-           OctoPrint.control.sendGcode(
-              "G1 Z" + (self.settings.settings.plugins.klipper.probeHeight()*1 + self.settings.settings.plugins.klipper.probeLift()*1) +
+        self.moveToPosition = function(x, y) {
+           OctoPrint.control.sendGcode( 
+              "G1 Z" + (self.settings.settings.plugins.klipper.probeHeight() * 1 + 
+              self.settings.settings.plugins.klipper.probeLift()*1) +
               " F" + self.settings.settings.plugins.klipper.probeSpeedZ()
            );
            OctoPrint.control.sendGcode(
-              "G1 X" + point.x() + " Y" + point.y() +
+              "G1 X" + x + " Y" + y +
               " F" + self.settings.settings.plugins.klipper.probeSpeedXy()
            );
            OctoPrint.control.sendGcode(
               "G1 Z" + self.settings.settings.plugins.klipper.probeHeight() +
                " F" + self.settings.settings.plugins.klipper.probeSpeedZ()
            );
+        }
+        
+        self.moveToPoint = function(index) {
+           var point = self.settings.settings.plugins.klipper.probePoints()[index];
+
+           self.moveToPosition(point.x(), point.y());
+           self.activePoint(index);
         }
     }
 

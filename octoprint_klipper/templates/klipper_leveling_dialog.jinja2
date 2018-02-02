@@ -6,16 +6,16 @@
     <div class="modal-body">
        <div class="row-fluid">
           <div class="span3">
-             <button class="btn btn-block" data-bind="click: startLeveling">Start</button>
-             <button class="btn btn-block" data-bind="click: previousPoint, enable: (activePoint() > 0)">Previous</button>
-             <button class="btn btn-block" data-bind="click: nextPoint, enable: (activePoint() < pointCount()-1)">Next</button>
-             <button class="btn btn-block" data-bind="click: stopLeveling" data-dismiss="modal">Close</button>
+             <button class="btn btn-block" data-bind="click: startLeveling"><i class="icon-play"></i> Start</button>
+             <button class="btn btn-block" data-bind="click: previousPoint, enable: (activePoint() > 0)"><i class="icon-step-backward"></i> Previous</button>
+             <button class="btn btn-block" data-bind="click: nextPoint, enable: (activePoint() < pointCount()-1)"><i class="icon-step-forward"></i> Next</button>
+             <button class="btn btn-block" data-bind="click: stopLeveling" data-dismiss="modal"><i class="icon-stop"></i> Stop</button>
           </div>
           <div class="span8">
              <div data-bind="foreach: settings.settings.plugins.klipper.probePoints" >
                 <div class="row-fluid">
                    <div class="span1"><i class="fa fa-arrow-right" data-bind="visible: ($index()==$parent.activePoint())"></i></div>
-                   <div class="span9">[<span data-bind="text: x"></span>,<span data-bind="text: y"></span>]</div>
+                   <button class="btn btn-mini btn-info" data-bind="click: $parent.jumpToPoint"><span data-bind="text: $index"></span>: (<span data-bind="text: x"></span>, <span data-bind="text: y"></span>)</button>
                 </div>
             </div>
           </div>

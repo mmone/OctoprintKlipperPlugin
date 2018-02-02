@@ -17,12 +17,16 @@ $(function() {
         }
         
         self.stopLeveling = function() {
-           self.activePoint(-1);
            OctoPrint.control.sendGcode("G1 Z" +
               (self.settings.settings.plugins.klipper.probeHeight()*1 +
                self.settings.settings.plugins.klipper.probeLift()*1)
            );
-           OctoPrint.control.sendGcode("G28")
+           self.gotoHome();
+        }
+        
+        self.gotoHome = function() {
+           OctoPrint.control.sendGcode("G28");
+           self.activePoint(-1);
         }
         
         self.nextPoint = function() {

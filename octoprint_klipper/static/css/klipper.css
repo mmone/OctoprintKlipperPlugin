@@ -1,9 +1,3 @@
-#tab_plugin_klipper iframe {
-   width: 100%;
-   height: 600px;
-   border: 1px solid #808080;
-}
-
 .plugin_klipper_log {
    padding: 0.5em;
    overflow-y: scroll;
@@ -14,9 +8,13 @@
 }
 
 .plugin_klipper_log .log-item {
-   margin: 0 auto 0.5em auto; 
+   margin: 0 auto 0 auto; 
 }
 
 .plugin_klipper_log .error {
    color: red;
+}
+
+.clear-btn {
+   margin-top: 6px;
 }

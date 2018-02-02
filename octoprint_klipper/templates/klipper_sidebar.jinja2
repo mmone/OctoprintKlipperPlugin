@@ -4,7 +4,7 @@
 <button class="btn btn-block" data-bind="click: connectionState.connect, text: connectionState.buttonText(), enable: loginState.isUser()">{{ _('Connect') }}</button>
 <hr>
     <div>
-      <label>Macros</label>
+      <label><i class="icon-list-alt"></i> Macros</label>
       <div data-bind="foreach: settings.settings.plugins.klipper.macros">
         <!-- ko if: sidebar -->
         <button class="btn btn-block" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>

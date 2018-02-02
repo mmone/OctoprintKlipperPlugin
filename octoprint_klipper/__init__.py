@@ -11,7 +11,7 @@ class KlipperPlugin(
       octoprint.plugin.SettingsPlugin,
       octoprint.plugin.AssetPlugin):
    
-   _parsingReturn = False
+   _parsingResponse = False
    _message = ""
    
    #-- Startupt Plugin
@@ -69,11 +69,11 @@ class KlipperPlugin(
    
    def on_parse_gcode(self, comm, line, *args, **kwargs):
       if "//" in line:
-         self._parsingReturn = True
-         self._message = self._message + line.strip('/')
+         self._parsingResponse = True
+         self._message = self._message + line.strip('/') + "<br/>"
       else:
-         if self._parsingReturn:
-             self._parsingReturn = False
+         if self._parsingResponse:
+             self._parsingResponse = False
              self.logInfo(self._message)
              self._message = ""
          if "!!" in line:
@@ -88,7 +88,7 @@ class KlipperPlugin(
        self._plugin_manager.send_plugin_message(
                 self._identifier,
                 dict(
-                        time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        time=datetime.datetime.now().strftime("%H:%M:%S"),
                         type="info", message=message)
                     )
    
@@ -96,7 +96,7 @@ class KlipperPlugin(
        self._plugin_manager.send_plugin_message(
                self._identifier,
                dict(
-                       time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                       time=datetime.datetime.now().strftime("%H:%M:%S"),
                        type="error",
                        message=error)
                     )

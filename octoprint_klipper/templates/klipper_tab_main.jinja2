@@ -1,32 +1,33 @@
 <div class="row-fluid">
   <div class="span8">
-    <label>Messages</label>
+    <label><i class="icon-tasks"></i> Messages</label>
     <div class="plugin_klipper_log" data-bind="foreach: logMessages">
-      <div class="log-item"><i data-bind="text: time"></i> <span data-bind="text: msg, css: type"></span></div>
+      <div class="log-item"><i data-bind="text: time"></i>: <span data-bind="html: msg, css: type"></span></div>
     </div>
-    <a href="#" data-bind="click: onClearLog" class="fa fa-trash" alt="Clear"></a>
+    &nbsp;
+    <button class="btn btn-mini pull-right clear-btn" data-bind="click: onClearLog, enable: isActive()"><i class="fa fa-trash"></i> Clear</button>
   </div>
   <div class="span4">
     <div class="control-group">
      <div class="controls">
            <label class="control-label">&nbsp;</label>
-           <button class="btn btn-block" data-bind="click: onGetStatus, enable: isActive()">Status</button>
+           <button class="btn btn-block" data-bind="click: onGetStatus, enable: isActive()"><i class="fa icon-black fa-info-circle"></i> Status</button>
      </div>
      <div class="controls">
           <hr>
-          <label class="control-label">Restart</label>
-          <button class="btn btn-block" data-bind="click: onRestartHost, enable: isActive()"><i class="fa fa-repeat"></i> Host</button>
-          <button class="btn btn-block" data-bind="click: onRestartFirmware, enable: isActive()"><i class="fa fa-repeat"></i> MCU</button>
+          <label class="control-label"><i class="icon-refresh"></i> Restart</label>
+          <button class="btn btn-block" data-bind="click: onRestartHost, enable: isActive()">Host</button>
+          <button class="btn btn-block" data-bind="click: onRestartFirmware, enable: isActive()">MCU</button>
      </div>
      <div class="controls">
          <hr>
-         <label class="control-label">Tools</label>
+         <label class="control-label"><i class="icon-wrench"></i> Tools</label>
          <button class="btn btn-block" data-bind="click: showLevelingDialog, enable: isActive()">Assisted Bed Leveling</button>
          <button class="btn btn-block" data-bind="click: showPidTuningDialog, enable: isActive()">PID Tuning</button>
      </div>
      <div class="controls">
          <hr>
-         <label class="control-label">Macros</label>
+         <label class="control-label"><i class="icon-list-alt"></i> Macros</label>
          <div data-bind="foreach: settings.settings.plugins.klipper.macros">
             <!-- ko if: tab -->
             <button class="btn btn-block" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>

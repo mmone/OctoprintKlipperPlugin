@@ -1,8 +1,11 @@
 <div class="row-fluid">
   <div class="span8">
     <label><i class="icon-tasks"></i> Messages</label>
-    <div class="plugin_klipper_log" data-bind="foreach: logMessages">
-      <div class="log-item"><i data-bind="text: time"></i>: <span data-bind="html: msg, css: type"></span></div>
+    <div class="plugin-klipper-log" data-bind="foreach: logMessages">
+      <div class="log-item">
+         <div data-bind="text: time" class="ts" ></div>
+         <div data-bind="html: msg, css: type" class="msg"></div>
+      </div>
     </div>
     &nbsp;
     <button class="btn btn-mini pull-right clear-btn" data-bind="click: onClearLog, enable: isActive()"><i class="fa fa-trash"></i> Clear</button>
@@ -10,7 +13,7 @@
   <div class="span4">
     <div class="control-group">
      <div class="controls">
-           <label class="control-label">&nbsp;</label>
+           <label class="control-label"></label>
            <button class="btn btn-block" data-bind="click: onGetStatus, enable: isActive()"><i class="fa icon-black fa-info-circle"></i> Status</button>
      </div>
      <div class="controls">

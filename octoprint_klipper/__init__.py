@@ -70,7 +70,7 @@ class KlipperPlugin(
    def on_parse_gcode(self, comm, line, *args, **kwargs):
       if "//" in line:
          self._parsingResponse = True
-         self._message = self._message + line.strip('/') + "<br/>"
+         self._message = self._message + line.strip('/')
       else:
          if self._parsingResponse:
              self._parsingResponse = False

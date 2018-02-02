@@ -6,14 +6,15 @@
 }
 
 .plugin-klipper-log .log-item {
-   margin: 2px auto 0 auto;
+   margin: 3px auto 0 auto;
    border: 1px solid #ddd;
    border-radius: 3px;
    background-color: #eeeeef;
+   color: 333;
 }
 
 .plugin-klipper-log .error {
-   color: #b94a48;
+   background-color: #eebabb;
 }
 
 .plugin-klipper-log .log-item .ts {
@@ -22,7 +23,7 @@
    height: 100%;
    vertical-align: top;
    font-size: 0.8em;
-   padding: 3px;
+   padding: 0 0 0 5px;
 }
 
 .plugin-klipper-log .log-item .msg {

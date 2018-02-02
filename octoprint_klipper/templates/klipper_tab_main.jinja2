@@ -2,9 +2,9 @@
   <div class="span8">
     <label><i class="icon-tasks"></i> Messages</label>
     <div class="plugin-klipper-log" data-bind="foreach: logMessages">
-      <div class="log-item">
+      <div class="log-item" data-bind="css: type">
          <div data-bind="text: time" class="ts" ></div>
-         <div data-bind="html: msg, css: type" class="msg"></div>
+         <div data-bind="html: msg" class="msg"></div>
       </div>
     </div>
     &nbsp;

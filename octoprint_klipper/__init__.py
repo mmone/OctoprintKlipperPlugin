@@ -9,11 +9,14 @@ class KlipperPlugin(
       octoprint.plugin.StartupPlugin,
       octoprint.plugin.TemplatePlugin,
       octoprint.plugin.SettingsPlugin,
-      octoprint.plugin.AssetPlugin,
-      octoprint.plugin.WizardPlugin):
+      octoprint.plugin.AssetPlugin):
+   
+   #-- Startupt Plugin
    
    def on_after_startup(self):
       pass
+      
+   #-- Settings Plugin
       
    def get_settings_defaults(self):
       return dict(
@@ -25,7 +28,9 @@ class KlipperPlugin(
          probeSpeedXy=1500,
          probeSpeedZ=500,
          probePoints=[{'x':0, 'y':0}])
-       
+         
+   #-- Template Plugin
+   
    def get_template_configs(self):
       return [
 #           dict(type="navbar", custom_bindings=True),
@@ -35,8 +40,10 @@ class KlipperPlugin(
            dict(type="tab", name="Klipper", template="klipper_tab_main.jinja2", suffix="_main", custom_bindings=True),
            dict(type="sidebar",
                  custom_bindings=True,
-                 replaces= "connection" if self._settings.get(["replace_connection_panel"]) else "")
+                 replaces= "connection" if self._settings.get_boolean(["replace_connection_panel"]) else "")
       ]
+   
+   #-- Asset Plugin
    
    def get_assets(self):
       return dict(
@@ -48,6 +55,24 @@ class KlipperPlugin(
          less=["css/klipper.less"]
       )
    
+   #-- GCODE Hook
+   
+   def on_parse_gcode(self, comm, line, *args, **kwargs):
+      if "//" in line:
+         self.parsingReturn = True
+         self.message = self.message + line.strip('/')
+      else:
+         if self.parsingReturn:
+             self.parsingReturn = False
+             self.logInfo(self.message)
+             self.message = ""
+         if "!!" in line:
+             self.logError(line.strip('!'))
+      return line
+   
+   
+   #-- Helpers
+         
    parsingReturn = False
    message = ""
    
@@ -67,22 +92,10 @@ class KlipperPlugin(
                        type="error",
                        message=error)
                     )
-       
-   def on_parse_gcode(self, comm, line, *args, **kwargs):
-      if "//" in line:
-         self.parsingReturn = True
-         self.message = self.message + line.strip('/')
-      else:
-         if self.parsingReturn:
-             self.parsingReturn = False
-             self.logInfo(self.message)
-             self.message = ""
-         if "!!" in line:
-             self.logError(line.strip('!'))
-      return line
-      
-   def is_wizard_required(self):
-       return True;
+
+
+
+
 
 __plugin_name__ = "Klipper"
 

@@ -74,7 +74,7 @@ class KlipperPlugin(
       else:
          if self._parsingReturn:
              self._parsingReturn = False
-             self.logInfo(self.message)
+             self.logInfo(self._message)
              self._message = ""
          if "!!" in line:
              self.logError(line.strip('!'))

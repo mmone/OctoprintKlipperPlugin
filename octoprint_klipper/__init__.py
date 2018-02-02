@@ -11,11 +11,21 @@ class KlipperPlugin(
       octoprint.plugin.SettingsPlugin,
       octoprint.plugin.AssetPlugin):
    
+   _parsingReturn = False
+   _message = ""
+   
    #-- Startupt Plugin
    
    def on_after_startup(self):
-      pass
-      
+      klipperPort = self._settings.get(["serialport"])
+      additionalPorts = self._settings.global_get(["serial", "additionalPorts"])
+
+      if klipperPort not in additionalPorts:
+          additionalPorts.append(klipperPort)
+          self._settings.global_set(["serial", "additionalPorts"], additionalPorts)
+          self._settings.save()
+          self._logger.info("Added klipper serial port (%s) to list of additional ports." % klipperPort)
+
    #-- Settings Plugin
       
    def get_settings_defaults(self):
@@ -59,22 +69,20 @@ class KlipperPlugin(
    
    def on_parse_gcode(self, comm, line, *args, **kwargs):
       if "//" in line:
-         self.parsingReturn = True
-         self.message = self.message + line.strip('/')
+         self._parsingReturn = True
+         self._message = self._message + line.strip('/')
       else:
-         if self.parsingReturn:
-             self.parsingReturn = False
+         if self._parsingReturn:
+             self._parsingReturn = False
              self.logInfo(self.message)
-             self.message = ""
+             self._message = ""
          if "!!" in line:
              self.logError(line.strip('!'))
       return line
    
    
    #-- Helpers
-         
-   parsingReturn = False
-   message = ""
+   
    
    def logInfo(self, message):
        self._plugin_manager.send_plugin_message(

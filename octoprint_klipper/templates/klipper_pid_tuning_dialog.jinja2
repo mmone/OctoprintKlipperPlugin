@@ -1,20 +1,20 @@
 <div id="klipper_pid_tuning_dialog" class="modal hide fade small" tabindex="-1" role="dialog" aria-labelledby="klipper_pid_tuning_dialog_label" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 id="klipper_pid_tuning_dialog_label">PID Tuning</h3>
+        <h3 id="klipper_pid_tuning_dialog_label">{{ _('PID Tuning') }}</h3>
     </div>
     <div class="modal-body">
        <div class="control-group">
-         <label class="control-label">Heater Index</label>
+         <label class="control-label">{{ _('Heater Index') }</label>
          <div class="controls">
            <div class="input-append">
               <input type="text" class="input-block-level span2" data-bind="value: heaterIndex">
-              <span class="add-on">index</span>
+              <span class="add-on">{{ _('index') }</span>
            </div>
          </div>
        </div>
        <div class="control-group">
-         <label class="control-label">Target Temperature</label>
+         <label class="control-label">{{ _('Target Temperature') }</label>
          <div class="controls">
             <div class="input-append">
                <input type="text" class="input-block-level span2" data-bind="value: targetTemperature">
@@ -22,10 +22,10 @@
             </div>
          </div>
        </div>
-       <label class="control-label">The result of the tuning cycle is reported in the terminal.</label>
+       <label class="control-label">{{ _('The result of the tuning cycle is reported in the terminal.') }</label>
        <div class="control-group">
          <div class="controls">
-             <button class="btn btn-block" data-bind="click: startTuning" data-dismiss="modal"><i class="icon-fire"></i> Start Tuning</button>
+             <button class="btn btn-block" data-bind="click: startTuning" data-dismiss="modal"><i class="icon-fire"></i> {{ _('Start Tuning') }</button>
          </div>
        </div>
    </div>

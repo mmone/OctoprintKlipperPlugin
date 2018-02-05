@@ -17,9 +17,9 @@
     <div class="control-group">
        <div class="controls">
           <div class="row-fluid">
-            <div class="span8" style="text-align: right"><small>Add macro button to:</small></div>
-            <div class="span1"><small>Klipper Tab</small></div>
-            <div class="span2"><small>Sidebar</small></div>
+            <div class="span8" style="text-align: right"><small>{ _('Add macro button to:') }}</small></div>
+            <div class="span1"><small>{ _('Klipper Tab') }}</small></div>
+            <div class="span2"><small>{ _('Sidebar') }}</small></div>
           </div>
        </div>
     </div>
@@ -58,7 +58,7 @@
     </div>
     <div class="control-group">
       <div class="controls">
-        <a href='#' data-bind='click: addMacro' class="fa fa-plus-circle"></a> Add Macro
+        <a href='#' data-bind='click: addMacro' class="fa fa-plus-circle"></a> {{ _('Add Macro') }
       </div>
     </div>
     
@@ -72,7 +72,7 @@
             <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeHeight">
             <span class="add-on">mm</span>
          </div>
-         <span class="help-inline">Z-height to probe at.</span>
+         <span class="help-inline">{{ _('Z-height to probe at.') }}</span>
       </div>
     </div>
     <div class="control-group">
@@ -82,7 +82,7 @@
            <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeLift">
            <span class="add-on">mm</span>
          </div>
-         <span class="help-inline">Lift Z before moving to next point.</span>
+         <span class="help-inline">{{ _('Lift Z before moving to next point.') }}</span>
       </div>
     </div>
     <div class="control-group">
@@ -129,7 +129,7 @@
    </div>
    <div class="control-group">
      <div class="controls">
-       <a href='#' data-bind='click: addProbePoint' class="fa fa-plus-circle"></a> Add Point
+       <a href='#' data-bind='click: addProbePoint' class="fa fa-plus-circle"></a> { _('Add Point') }}
      </div>
    </div>
 </form>

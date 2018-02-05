@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div class="span8">
-    <label><i class="icon-tasks"></i> Messages</label>
+    <label><i class="icon-tasks"></i>{{ _('Messages') }}</label>
     <div class="plugin-klipper-log" data-bind="foreach: logMessages">
       <div class="log-item" data-bind="css: type">
          <div data-bind="text: time" class="ts" ></div>
@@ -8,29 +8,29 @@
       </div>
     </div>
     &nbsp;
-    <button class="btn btn-mini pull-right clear-btn" data-bind="click: onClearLog, enable: isActive()"><i class="fa fa-trash"></i> Clear</button>
+    <button class="btn btn-mini pull-right clear-btn" data-bind="click: onClearLog, enable: isActive()"><i class="fa fa-trash"></i> {{ _('Clear') }}</button>
   </div>
   <div class="span4">
     <div class="control-group">
      <div class="controls">
            <label class="control-label"></label>
-           <button class="btn btn-block" data-bind="click: onGetStatus, enable: isActive()"><i class="fa icon-black fa-info-circle"></i> Get Status</button>
+           <button class="btn btn-block" data-bind="click: onGetStatus, enable: isActive()"><i class="fa icon-black fa-info-circle"></i> {{ _('Get Status') }}</button>
      </div>
      <div class="controls">
           <hr>
-          <label class="control-label"><i class="icon-refresh"></i> Restart</label>
-          <button class="btn btn-block" data-bind="click: onRestartHost, enable: isActive()">Host</button>
-          <button class="btn btn-block" data-bind="click: onRestartFirmware, enable: isActive()">Firmware</button>
+          <label class="control-label"><i class="icon-refresh"></i> {{ _('Restart') }}</label>
+          <button class="btn btn-block" data-bind="click: onRestartHost, enable: isActive()">{{ _('Host') }}</button>
+          <button class="btn btn-block" data-bind="click: onRestartFirmware, enable: isActive()">{{ _('Firmware') }}</button>
      </div>
      <div class="controls">
          <hr>
-         <label class="control-label"><i class="icon-wrench"></i> Tools</label>
-         <button class="btn btn-block" data-bind="click: showLevelingDialog, enable: isActive()">Assisted Bed Leveling</button>
-         <button class="btn btn-block" data-bind="click: showPidTuningDialog, enable: isActive()">PID Tuning</button>
+         <label class="control-label"><i class="icon-wrench"></i> {{ _('Tools') }}</label>
+         <button class="btn btn-block" data-bind="click: showLevelingDialog, enable: isActive()">{{ _('Assisted Bed Leveling') }}</button>
+         <button class="btn btn-block" data-bind="click: showPidTuningDialog, enable: isActive()">{{ _('PID Tuning') }}</button>
      </div>
      <div class="controls">
          <hr>
-         <label class="control-label"><i class="icon-list-alt"></i> Macros</label>
+         <label class="control-label"><i class="icon-list-alt"></i> {{ _('Macros') }}</label>
          <div data-bind="foreach: settings.settings.plugins.klipper.macros">
             <!-- ko if: tab -->
             <button class="btn btn-block" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>

@@ -1,7 +1,7 @@
 <div id="klipper_leveling_dialog" class="modal hide fade small" tabindex="-1" role="dialog" aria-labelledby="leveling_dialog_label" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 id="leveling_dialog_label">Assisted Bed Leveling</h3>
+        <h3 id="leveling_dialog_label">{{ _('Assisted Bed Leveling') }}</h3>
     </div>
     <div class="modal-body">
         <div class="row-fluid">
@@ -11,7 +11,7 @@
            <div class="span1"></div>
            <div class="span1">
               <button class="btn btn-mini btn-info btn-block" data-bind="click: gotoHome">
-                    Home
+                    {{ _('Home') }}
               </button>
            </div>
            <div class="span7">&nbsp;</div>
@@ -34,10 +34,10 @@
           <div class="span2"></div>
           <div class="btn-toolbar span8">
              <div class="btn-group">
-                <button class="btn" data-bind="click: startLeveling"><i class="icon-play"></i> Start</button>
-                <button class="btn" data-bind="click: previousPoint, enable: (activePoint() > 0)"><i class="icon-chevron-left"></i> Previous</button>
-                <button class="btn" data-bind="click: nextPoint, enable: (activePoint() < pointCount()-1)">Next <i class="icon-chevron-right"></i></button>
-                <button class="btn" data-bind="click: stopLeveling" data-dismiss="modal"><i class="icon-stop"></i> Stop</button>
+                <button class="btn" data-bind="click: startLeveling"><i class="icon-play"></i> {{ _('Start') }}</button>
+                <button class="btn" data-bind="click: previousPoint, enable: (activePoint() > 0)"><i class="icon-chevron-left"></i> {{ _('Previous') }}</button>
+                <button class="btn" data-bind="click: nextPoint, enable: (activePoint() < pointCount()-1)">{{ _('Next') }} <i class="icon-chevron-right"></i></button>
+                <button class="btn" data-bind="click: stopLeveling" data-dismiss="modal"><i class="icon-stop"></i> {{ _('Stop') }}</button>
              </div>
           </div>
           <div class="span2"></div>

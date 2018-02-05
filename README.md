@@ -28,7 +28,14 @@ Click on the wrench icon in the titlebar to open OctoPrints settings dialog. Sel
 
 ## Screenshots
 
+#### Message Log
 ![Message Log](docs/assets/img/message-log.png)
+
+#### Bed Leveling
 ![Bed Leveling](docs/assets/img/bed-leveling.png)
-![Pid Tuning](docs/assets/img/pid-tuning.png)
+
+#### PID Tuning
+![PID Tuning](docs/assets/img/pid-tuning.png)
+
+#### Settings
 ![Settings](docs/assets/img/settings.png)

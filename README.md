@@ -10,9 +10,6 @@ This plugin assists in managing and monitoring the [Klipper](https://github.com/
 - PID Tuning Dialog.
 - Message log displaying messages from Klipper prepended with "//" and "!!".
 
-### Status
-Usable
-
 ### ToDo
 - Add a continously updated status display in octoprints navbar.
 
@@ -27,3 +24,11 @@ or manually using this URL:
 ## Configuration
 
 Click on the wrench icon in the titlebar to open OctoPrints settings dialog. Select "Klipper" at the bottom of the settings dialog.
+
+
+## Screenshots
+
+![Message Log](docs/assets/img/message-log.png)
+![Bed Leveling](docs/assets/img/bed-leveling.png)
+![Pid Tuning](docs/assets/img/pid-tuning.png)
+![Settings](docs/assets/img/settings.png)

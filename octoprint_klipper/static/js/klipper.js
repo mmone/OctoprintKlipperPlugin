@@ -27,6 +27,10 @@ $(function() {
             });;
         }
         
+        self.executeMacro = function(macro) {	
+           OctoPrint.control.sendGcode(macro.macro());	
+        }
+     
         self.onGetStatus = function() {
            self.shortStatus("Updating Status ...")
            OctoPrint.control.sendGcode("Status")

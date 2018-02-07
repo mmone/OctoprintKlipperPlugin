@@ -52,7 +52,9 @@ $(function() {
         }
         
         self.onDataUpdaterPluginMessage = function(plugin, message) {
-           self.logMessage(message["time"], message["type"], message["message"]);
+           if(plugin == "klipper") {
+              self.logMessage(message["time"], message["type"], message["message"]);
+           }
         }
 
         self.logMessage = function(timestamp, type, message) {

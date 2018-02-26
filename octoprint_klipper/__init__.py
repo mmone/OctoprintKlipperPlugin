@@ -71,13 +71,14 @@ class KlipperPlugin(
    #-- Event Handler Plugin
    
    def on_event(self, event, payload):
+       self.pollStatus()
        if "Connecting" == event:
            self.updateStatus("info", "Connecting ...")
        elif "Connected" == event:
-           self.updateStatus("info", "Connected to Host")
+           self.updateStatus("info", "Connected to host")
            self.logInfo("Connected to host via %s @%sbps" % (payload["port"], payload["baudrate"]))
        elif "Disconnected" == event:
-           self.updateStatus("info", "Disconnected from Host")
+           self.updateStatus("info", "Disconnected from host")
        elif "Error" == event:
            self.updateStatus("error", "Error")
            self.logError(payload["error"])
@@ -118,6 +119,9 @@ class KlipperPlugin(
                         type=type, payload=payload)
                     )     
    
+   def pollStatus(self):
+       self._printer.commands("STATUS")
+       
    def updateStatus(self, type, status):
        self.sendMessage("status", type, status)
    

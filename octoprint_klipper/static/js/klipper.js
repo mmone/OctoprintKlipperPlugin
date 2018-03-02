@@ -32,17 +32,14 @@ $(function() {
         }
      
         self.onGetStatus = function() {
-           self.shortStatus("Updating Status ...")
            OctoPrint.control.sendGcode("Status")
         }
         
         self.onRestartFirmware = function() {
-           self.shortStatus("Restarting Firmware ...");
            OctoPrint.control.sendGcode("FIRMWARE_RESTART")
         };
         
         self.onRestartHost = function() {
-           self.shortStatus("Restarting Host ...");
            OctoPrint.control.sendGcode("RESTART")
         };
         
@@ -53,7 +50,11 @@ $(function() {
         
         self.onDataUpdaterPluginMessage = function(plugin, message) {
            if(plugin == "klipper") {
-              self.logMessage(message["time"], message["type"], message["message"]);
+              if(message["type"] == "status") {
+                 self.shortStatus(message["payload"]);
+              } else {
+                 self.logMessage(message["time"], message["subtype"], message["payload"]);
+              }
            }
         }
 

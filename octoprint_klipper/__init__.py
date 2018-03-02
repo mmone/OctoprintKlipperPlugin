@@ -2,18 +2,21 @@
 from __future__ import absolute_import
 import datetime
 import logging
+from enum import Enum
 import octoprint.plugin
 import octoprint.plugin.core
+from octoprint.util.comm import parse_firmware_line
 
 class KlipperPlugin(
       octoprint.plugin.StartupPlugin,
       octoprint.plugin.TemplatePlugin,
       octoprint.plugin.SettingsPlugin,
-      octoprint.plugin.AssetPlugin):
+      octoprint.plugin.AssetPlugin,
+      octoprint.plugin.EventHandlerPlugin):
    
    _parsingResponse = False
    _message = ""
-   
+
    #-- Startupt Plugin
    
    def on_after_startup(self):
@@ -43,7 +46,7 @@ class KlipperPlugin(
    
    def get_template_configs(self):
       return [
-#           dict(type="navbar", custom_bindings=True),
+           dict(type="navbar", custom_bindings=True),
            dict(type="settings", custom_bindings=True),
            dict(type="generic", name="Assisted Bed Leveling", template="klipper_leveling_dialog.jinja2", custom_bindings=True),
            dict(type="generic", name="PID Tuning", template="klipper_pid_tuning_dialog.jinja2", custom_bindings=True),           
@@ -65,42 +68,68 @@ class KlipperPlugin(
          less=["css/klipper.less"]
       )
    
+   #-- Event Handler Plugin
+   
+   def on_event(self, event, payload):
+       self.pollStatus()
+       if "Connecting" == event:
+           self.updateStatus("info", "Connecting ...")
+       elif "Connected" == event:
+           self.updateStatus("info", "Connected to host")
+           self.logInfo("Connected to host via %s @%sbps" % (payload["port"], payload["baudrate"]))
+       elif "Disconnected" == event:
+           self.updateStatus("info", "Disconnected from host")
+       elif "Error" == event:
+           self.updateStatus("error", "Error")
+           self.logError(payload["error"])
+           
    #-- GCODE Hook
    
    def on_parse_gcode(self, comm, line, *args, **kwargs):
-      if "//" in line:
+      if "FIRMWARE_VERSION" in line:
+         printerInfo = parse_firmware_line(line)
+         
+         if "FIRMWARE_VERSION" in printerInfo:
+             self.logInfo("Firmware version: %s" % printerInfo["FIRMWARE_VERSION"])
+             
+      elif "//" in line:
          self._parsingResponse = True
          self._message = self._message + line.strip('/')
+         
       else:
          if self._parsingResponse:
              self._parsingResponse = False
              self.logInfo(self._message)
              self._message = ""
+             
          if "!!" in line:
-             self.logError(line.strip('!'))
+             msg = line.strip('!')
+             self.updateStatus("error", msg)
+             self.logError(msg)
+             
       return line
-   
-   
+
    #-- Helpers
    
-   
-   def logInfo(self, message):
+   def sendMessage(self, type, subtype, payload):
        self._plugin_manager.send_plugin_message(
                 self._identifier,
                 dict(
                         time=datetime.datetime.now().strftime("%H:%M:%S"),
-                        type="info", message=message)
-                    )
+                        type=type, payload=payload)
+                    )     
    
-   def logError(self, error):
-       self._plugin_manager.send_plugin_message(
-               self._identifier,
-               dict(
-                       time=datetime.datetime.now().strftime("%H:%M:%S"),
-                       type="error",
-                       message=error)
-                    )
+   def pollStatus(self):
+       self._printer.commands("STATUS")
+       
+   def updateStatus(self, type, status):
+       self.sendMessage("status", type, status)
+   
+   def logInfo(self, message):
+       self.sendMessage("log", "info", message)
 
+   def logError(self, error):
+       self.sendMessage("log", "error", message)
 
 
 
@@ -113,6 +142,6 @@ def __plugin_load__():
       
    __plugin_implementation__ = KlipperPlugin()
    __plugin_hooks__ = {
-      "octoprint.comm.protocol.gcode.received": __plugin_implementation__.on_parse_gcode,
+      "octoprint.comm.protocol.gcode.received": __plugin_implementation__.on_parse_gcode
    }
 

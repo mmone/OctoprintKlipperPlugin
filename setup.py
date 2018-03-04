@@ -21,7 +21,7 @@ plugin_version = "0.1.0"
 plugin_description = """A plugin for octoprint to control and monitor the Klipper 3D printer software."""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
-plugin_author = "Martin Mühlhäuser"
+plugin_author = "Martin Muehlhaeuser"
 
 # The plugin's author's mail address.
 plugin_author_email = "github@mmone.de"
@@ -33,7 +33,7 @@ plugin_url = "https://github.com/mmone/OctoPrintKlipper"
 plugin_license = "AGPLv3"
 
 # Any additional requirements besides OctoPrint should be listed here
-plugin_requires = ["emum34"]
+plugin_requires = []
 
 ### --------------------------------------------------------------------------------------------------------------------
 ### More advanced options that you usually shouldn't have to touch follow after this point

@@ -2,7 +2,6 @@
 from __future__ import absolute_import
 import datetime
 import logging
-from enum import Enum
 import octoprint.plugin
 import octoprint.plugin.core
 from octoprint.util.comm import parse_firmware_line

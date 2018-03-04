@@ -103,7 +103,7 @@ class KlipperPlugin(
              
          if "!!" in line:
              msg = line.strip('!')
-             self.updateStatus("error", msg)
+             self.updateStatus("error", "Error")
              self.logError(msg)
              
       return line

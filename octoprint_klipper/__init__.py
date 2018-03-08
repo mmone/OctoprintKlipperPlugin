@@ -70,7 +70,6 @@ class KlipperPlugin(
    #-- Event Handler Plugin
    
    def on_event(self, event, payload):
-       self.pollStatus()
        if "Connecting" == event:
            self.updateStatus("info", "Connecting ...")
        elif "Connected" == event:

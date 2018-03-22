@@ -127,7 +127,7 @@ class KlipperPlugin(
        self.sendMessage("log", "info", message)
 
    def logError(self, error):
-       self.sendMessage("log", "error", message)
+       self.sendMessage("log", "error", error)
 
 
 

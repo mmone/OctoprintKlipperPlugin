@@ -2,16 +2,16 @@ $(function() {
     function KlipperPidTuningViewModel(parameters) {
         var self = this;
         
-        self.heaterIndex = ko.observable();
+        self.heaterName = ko.observable();
         self.targetTemperature = ko.observable();
         
         self.onStartup = function() {
-           self.heaterIndex(0);
+           self.heaterName("");
            self.targetTemperature(190);
         }
         
         self.startTuning = function() {
-           OctoPrint.control.sendGcode("M303 E" + self.heaterIndex() + " S" + self.targetTemperature());
+           OctoPrint.control.sendGcode("PID_CALIBRATE HEATER=" + self.heaterName() + " TARGET=" + self.targetTemperature());
         }
     }
 

@@ -27,6 +27,15 @@ $(function() {
             });;
         }
         
+        self.showOffsetDialog = function() {
+           var dialog = $("#klipper_offset_dialog");
+           dialog.modal({
+                show: 'true',
+                backdrop: 'static',
+                keyboard: false
+            });;
+        }
+        
         self.executeMacro = function(macro) {	
            OctoPrint.control.sendGcode(macro.macro());	
         }

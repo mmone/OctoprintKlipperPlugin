@@ -1,0 +1,42 @@
+<div id="klipper_offset_dialog" class="modal hide fade small" tabindex="-1" role="dialog" aria-labelledby="klipper_offset_dialog_label" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 id="klipper_pid_tuning_dialog_label">{{ _('Coordinate Offset') }}</h3>
+    </div>
+    <div class="modal-body">
+          <div class="row-fluid" style="margin-bottom: 15px">
+             <label class="control-label">{{ _('Set an offset for all future GCODE move commands in mm.') }}</label>
+          </div>
+          <div class="row-fluid" style="margin-bottom: 15px">
+            <div class="input-append span3">
+              <input type="text" class="input-block-level span6" data-bind="value: offsetX">
+              <span class="add-on">{{ _('X') }}</span>
+            </div>
+            <div class="input-append span3">
+              <input type="text" class="input-block-level span6" data-bind="value: offsetY">
+              <span class="add-on">{{ _('Y') }}</span>
+            </div>
+            <div class="input-append span3">
+              <input type="text" class="input-block-level span6" data-bind="value: offsetZ">
+              <span class="add-on">{{ _('Z') }}</span>
+            </div>
+          </div>
+          <div class="row-fluid" style="margin-bottom: 15px">
+             <label class="checkbox">
+                 <input type="checkbox" data-bind="checked: adjust" id="settings-serialAutoconnect">{{ _('Add to existing offset') }}
+             </label>
+          </div>
+       <div class="control-group">
+         <div class="controls">
+             <button class="btn btn-block" data-bind="click: setOffset" data-dismiss="modal"><i class="icon-cross"></i> {{ _('Set Offset') }}</button>
+         </div>
+       </div>
+   </div>
+</div>
+
+
+
+<div class="controls">
+                        
+                    </div>
+

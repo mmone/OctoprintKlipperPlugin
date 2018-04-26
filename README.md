@@ -8,6 +8,7 @@ This plugin assists in managing and monitoring the [Klipper](https://github.com/
 - User defineable macro buttons.
 - Assisted bed leveling wizard with user definable probe points.
 - PID Tuning Dialog.
+- Dialog to set a coordinate offset for future GCODE move commands.
 - Message log displaying messages from Klipper prepended with "//" and "!!".
 
 ### ToDo
@@ -36,6 +37,9 @@ Click on the wrench icon in the titlebar to open OctoPrints settings dialog. Sel
 
 #### PID Tuning
 ![PID Tuning](docs/assets/img/pid-tuning.png)
+
+#### Coordinate Offset
+![Coordinate Offset](docs/assets/img/offset.png)
 
 #### Settings
 ![Settings](docs/assets/img/settings.png)

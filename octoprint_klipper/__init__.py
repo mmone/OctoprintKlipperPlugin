@@ -48,7 +48,8 @@ class KlipperPlugin(
            dict(type="navbar", custom_bindings=True),
            dict(type="settings", custom_bindings=True),
            dict(type="generic", name="Assisted Bed Leveling", template="klipper_leveling_dialog.jinja2", custom_bindings=True),
-           dict(type="generic", name="PID Tuning", template="klipper_pid_tuning_dialog.jinja2", custom_bindings=True),           
+           dict(type="generic", name="PID Tuning", template="klipper_pid_tuning_dialog.jinja2", custom_bindings=True),
+           dict(type="generic", name="Coordinate Offset", template="klipper_offset_dialog.jinja2", custom_bindings=True),
            dict(type="tab", name="Klipper", template="klipper_tab_main.jinja2", suffix="_main", custom_bindings=True),
            dict(type="sidebar",
                  custom_bindings=True,
@@ -62,7 +63,8 @@ class KlipperPlugin(
          js=["js/klipper.js",
               "js/klipper_settings.js",
               "js/klipper_leveling.js",
-              "js/klipper_pid_tuning.js"],
+              "js/klipper_pid_tuning.js",
+              "js/klipper_offset.js"],
          css=["css/klipper.css"],
          less=["css/klipper.less"]
       )

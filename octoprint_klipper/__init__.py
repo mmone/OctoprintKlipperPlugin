@@ -53,6 +53,7 @@ class KlipperPlugin(
            dict(type="tab", name="Klipper", template="klipper_tab_main.jinja2", suffix="_main", custom_bindings=True),
            dict(type="sidebar",
                  custom_bindings=True,
+                 icon="rocket",
                  replaces= "connection" if self._settings.get_boolean(["replace_connection_panel"]) else "")
       ]
    

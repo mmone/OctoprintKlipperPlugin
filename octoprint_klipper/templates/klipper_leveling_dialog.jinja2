@@ -16,7 +16,7 @@
            </div>
            <div class="span7">&nbsp;</div>
         </div>
-        <div data-bind="foreach: settings.settings.plugins.klipper.probePoints">
+        <div data-bind="foreach: settings.settings.plugins.klipper.probe.points">
            <div class="row-fluid">
             <div class="span1">
                <i class="fa fa-arrow-right pull-right" data-bind="visible: ($index()==$parent.activePoint())"></i>
@@ -24,7 +24,12 @@
             <div data-bind="text: $index" class="span1"></div>
             <div class="span3">
                   <button class="btn btn-mini btn-info btn-block" data-bind="click: $parent.jumpToPoint">
+                     <!-- ko if: name -->
+                     <span data-bind="text: name"></span>
+                     <!-- /ko -->
+                     <!-- ko ifnot: name -->
                      ( <span data-bind="text: x"></span>, <span data-bind="text: y"></span> )
+                     <!-- /ko -->
                   </button>
             </div>
             <div class="span7">&nbsp;</div>

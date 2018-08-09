@@ -27,19 +27,24 @@ $(function() {
         }
         
         self.addProbePoint = function() {
-           self.settings.settings.plugins.klipper.probePoints.push({x: 0, y:0, z:0});
+           self.settings.settings.plugins.klipper.probe.points.push(
+              {
+                 name: 'point-#',
+                 x:0, y:0, z:0
+              }
+           );
         }
         
         self.removeProbePoint = function(point) {
-           self.settings.settings.plugins.klipper.probePoints.remove(point);
+           self.settings.settings.plugins.klipper.probe.points.remove(point);
         }
         
         self.moveProbePointUp = function(macro) {
-           self.moveItemUp(self.settings.settings.plugins.klipper.probePoints, macro)
+           self.moveItemUp(self.settings.settings.plugins.klipper.probe.points, macro)
         }
                 
         self.moveProbePointDown = function(macro) {
-           self.moveItemDown(self.settings.settings.plugins.klipper.probePoints, macro)
+           self.moveItemDown(self.settings.settings.plugins.klipper.probe.points, macro)
         }
         
         self.moveItemDown = function(list, item) {
@@ -56,36 +61,6 @@ $(function() {
               var rawList = list();
               list.splice(i-1, 2, rawList[i], rawList[i-1]);
            }
-        }
-        
-        self.loadKlipperConfig = function() {
-           $.ajax({
-             method: "GET",
-             url: "/api/plugin/klipper",
-             headers: {'X-Api-Key': '2CE2F6BA87244897B7F3A1BED3B1A3ED'}
-           })
-           .done(function( msg ) {
-              self.klipperConfig(msg)
-            });
-        }
-        
-        self.saveKlipperConfig = function() {
-           $.ajax({
-             method: "POST",
-             url: "/api/plugin/klipper",
-             headers: {
-                "x-api-key": "2CE2F6BA87244897B7F3A1BED3B1A3ED",
-                "content-type": "application/json",
-                "cache-control": "no-cache"
-             },
-             data: {
-                command: "save_config",
-                text: encodeURI(self.klipperConfig)
-             }
-           })
-           .done(function( msg ) {
-              console.log(msg);
-           });
         }
     }
 

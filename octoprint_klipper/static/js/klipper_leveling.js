@@ -18,8 +18,8 @@ $(function() {
         
         self.stopLeveling = function() {
            OctoPrint.control.sendGcode("G1 Z" +
-              (self.settings.settings.plugins.klipper.probeHeight()*1 +
-               self.settings.settings.plugins.klipper.probeLift()*1)
+              (self.settings.settings.plugins.klipper.probe.height()*1 +
+               self.settings.settings.plugins.klipper.probe.lift()*1)
            );
            self.gotoHome();
         }
@@ -39,32 +39,32 @@ $(function() {
         
         self.jumpToPoint = function(item) {
            self.moveToPoint(
-              self.settings.settings.plugins.klipper.probePoints().indexOf(item)
+              self.settings.settings.plugins.klipper.probe.points().indexOf(item)
            );
         }
         
         self.pointCount = function() {
-           return self.settings.settings.plugins.klipper.probePoints().length;
+           return self.settings.settings.plugins.klipper.probe.points().length;
         }
         
         self.moveToPosition = function(x, y) {
            OctoPrint.control.sendGcode( 
-              "G1 Z" + (self.settings.settings.plugins.klipper.probeHeight() * 1 + 
-              self.settings.settings.plugins.klipper.probeLift()*1) +
-              " F" + self.settings.settings.plugins.klipper.probeSpeedZ()
+              "G1 Z" + (self.settings.settings.plugins.klipper.probe.height() * 1 + 
+              self.settings.settings.plugins.klipper.probe.lift()*1) +
+              " F" + self.settings.settings.plugins.klipper.probe.speed_z()
            );
            OctoPrint.control.sendGcode(
               "G1 X" + x + " Y" + y +
-              " F" + self.settings.settings.plugins.klipper.probeSpeedXy()
+              " F" + self.settings.settings.plugins.klipper.probe.speed_xy()
            );
            OctoPrint.control.sendGcode(
-              "G1 Z" + self.settings.settings.plugins.klipper.probeHeight() +
-               " F" + self.settings.settings.plugins.klipper.probeSpeedZ()
+              "G1 Z" + self.settings.settings.plugins.klipper.probe.height() +
+               " F" + self.settings.settings.plugins.klipper.probe.speed_z()
            );
         }
         
         self.moveToPoint = function(index) {
-           var point = self.settings.settings.plugins.klipper.probePoints()[index];
+           var point = self.settings.settings.plugins.klipper.probe.points()[index];
 
            self.moveToPosition(point.x(), point.y());
            self.activePoint(index);

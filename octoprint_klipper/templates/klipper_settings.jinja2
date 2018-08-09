@@ -10,19 +10,19 @@
     <div class="control-group">
         <label class="control-label">{{ _('Serial Port') }}</label>
         <div class="controls">
-            <input type="text" class="input-block-level" data-bind="value: settings.settings.plugins.klipper.serialport">
+            <input type="text" class="input-block-level" data-bind="value: settings.settings.plugins.klipper.connection.port">
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">{{ _('Replace Connection Panel') }}</label>
         <div class="controls">
-            <input type="checkbox" class="input-block-level" data-bind="checked: settings.settings.plugins.klipper.replace_connection_panel">
+            <input type="checkbox" class="input-block-level" data-bind="checked: settings.settings.plugins.klipper.connection.replace_connection_panel">
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">{{ _('Klipper Config Path') }}</label>
         <div class="controls">
-            <input type="text" class="input-block-level" data-bind="value: settings.settings.plugins.klipper.configPath">
+            <input type="text" class="input-block-level" data-bind="value: settings.settings.plugins.klipper.configuration.path">
         </div>
     </div>
   </div>
@@ -80,7 +80,7 @@
       <label class="control-label">{{ _('Probe Height') }}</label>
       <div class="controls">
          <div class="input-append">
-            <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeHeight">
+            <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probe.height">
             <span class="add-on">mm</span>
          </div>
          <span class="help-inline">{{ _('Z-height to probe at.') }}</span>
@@ -90,7 +90,7 @@
       <label class="control-label">{{ _('Probe Lift') }}</label>
       <div class="controls">
          <div class="input-append">
-           <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeLift">
+           <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probe.lift">
            <span class="add-on">mm</span>
          </div>
          <span class="help-inline">{{ _('Lift Z before moving to next point.') }}</span>
@@ -100,7 +100,7 @@
       <label class="control-label">{{ _('Probe Feedrate Z') }}</label>
       <div class="controls">
          <div class="input-append">
-           <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeSpeedZ">
+           <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probe.speed_z">
            <span class="add-on">mm/min</span>
          </div>
       </div>
@@ -109,7 +109,7 @@
       <label class="control-label">{{ _('Feedrate X/Y') }}</label>
       <div class="controls">
          <div class="input-append">
-           <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probeSpeedXy">
+           <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probe.speed_xy">
            <span class="add-on">mm/min</span>
          </div>
       </div>
@@ -118,16 +118,18 @@
       <h5>{{ _('Probe Points') }}</h5>
       <div class="controls">
         <div class="row-fluid">
-          <div class="span3">X(mm)</div>
-          <div class="span3">Y(mm)</div>
+          <div class="span3">name</div>
+          <div class="span3">x(mm)</div>
+          <div class="span3">y(mm)</div>
           <div class="span3"> </div>
         </div>
       </div>
     </div>
-    <div data-bind="foreach: settings.settings.plugins.klipper.probePoints" class="control-group">
+    <div data-bind="foreach: settings.settings.plugins.klipper.probe.points" class="control-group">
        <label class="control-label" data-bind="text: $index"></label>
        <div class="controls">
            <div class="row-fluid">
+              <div class="span3"><input type="text" class="input-block-level" data-bind="value: name"></div>
               <div class="span3"><input type="text" class="input-block-level" data-bind="value: x"></div>
               <div class="span3"><input type="text" class="input-block-level" data-bind="value: y"></div>
               <div class="span3">
@@ -146,7 +148,7 @@
   </div>
   <div class="tab-pane" id="conf">
    <div class="control-group">
-      <textarea rows="32" class="block" data-bind="value: settings.settings.plugins.klipper.config"></textarea>
+      <textarea id="plugin-klipper-config" rows="31" class="block" data-bind="value: settings.settings.plugins.klipper.config"></textarea>
    </div>
   </div>
 </div>

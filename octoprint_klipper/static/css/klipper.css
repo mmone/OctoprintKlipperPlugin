@@ -35,3 +35,7 @@
 .clear-btn {
    margin-top: 6px;
 }
+
+#plugin-klipper-config {
+   font-family: monospace;
+}

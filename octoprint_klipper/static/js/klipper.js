@@ -53,7 +53,7 @@ $(function() {
         };
         
         self.onAfterBinding = function() {
-           self.connectionState.selectedPort(self.settings.settings.plugins.klipper.serialport());
+           self.connectionState.selectedPort(self.settings.settings.plugins.klipper.connection.port());
         }
         
         self.onDataUpdaterPluginMessage = function(plugin, message) {

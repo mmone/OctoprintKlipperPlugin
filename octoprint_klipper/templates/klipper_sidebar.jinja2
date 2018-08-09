@@ -1,13 +1,12 @@
 <label for="connection_printers" data-bind="css: {disabled: !connectionState.isErrorOrClosed()}, enable: connectionState.isErrorOrClosed() && loginState.isUser()">{{ _('Printer Profile') }}</label>
 <select id="connection_printers" data-bind="options: connectionState.printerOptions, optionsText: 'name', optionsValue: 'id', value: connectionState.selectedPrinter, css: {disabled: !connectionState.isErrorOrClosed()}, enable: connectionState.isErrorOrClosed() && loginState.isUser()"></select>
-
 <button class="btn btn-block" data-bind="click: connectionState.connect, text: connectionState.buttonText(), enable: loginState.isUser()">{{ _('Connect') }}</button>
 <hr>
-    <div>
-      <label><i class="icon-list-alt"></i> {{ _('Macros') }}</label>
-      <div data-bind="foreach: settings.settings.plugins.klipper.macros">
-        <!-- ko if: sidebar -->
-        <button class="btn btn-block" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>
-        <!-- /ko -->
-      </div>
-    </div>
+<div>
+   <label><i class="icon-list-alt"></i> {{ _('Macros') }}</label>
+   <div data-bind="foreach: settings.settings.plugins.klipper.macros">
+      <!-- ko if: sidebar -->
+      <button class="btn btn-block" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>
+      <!-- /ko -->
+   </div>
+</div>

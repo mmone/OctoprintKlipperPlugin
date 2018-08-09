@@ -1,4 +1,12 @@
 <form class="form-horizontal">
+<ul class="nav nav-pills" id="klipper-settings">
+  <li><a href="#basic" data-toggle="tab">Basic</a></li>
+  <li><a href="#macros" data-toggle="tab">Macros</a></li>
+  <li><a href="#level" data-toggle="tab">Bed Leveling</a></li>
+  <li><a href="#conf" data-toggle="tab">Klipper Configuration</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="basic">
     <div class="control-group">
         <label class="control-label">{{ _('Serial Port') }}</label>
         <div class="controls">
@@ -12,8 +20,13 @@
         </div>
     </div>
     <div class="control-group">
-      <h4>{{ _('Macros') }}<h4>
+        <label class="control-label">{{ _('Klipper Config Path') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" data-bind="value: settings.settings.plugins.klipper.configPath">
+        </div>
     </div>
+  </div>
+  <div class="tab-pane" id="macros">
     <div class="control-group">
        <div class="controls">
           <div class="row-fluid">
@@ -48,7 +61,7 @@
            <div class="controls">
                <div class="row-fluid">
                  <div class="span8">
-                    <textarea rows="4" class="block" data-bind="value: macro">
+                    <textarea rows="2" class="block" data-bind="value: macro">
                     </textarea>
                  </div>
                  <div class="span2"></div>
@@ -61,10 +74,8 @@
         <a href='#' data-bind='click: addMacro' class="fa fa-plus-circle"></a> {{ _('Add Macro') }}
       </div>
     </div>
-    
-    <div class="control-group">
-      <h4>{{ _('Assisted Bed Leveling') }}</h4>
-    </div>
+  </div>
+  <div class="tab-pane" id="level">
     <div class="control-group">
       <label class="control-label">{{ _('Probe Height') }}</label>
       <div class="controls">
@@ -129,7 +140,14 @@
    </div>
    <div class="control-group">
      <div class="controls">
-       <a href='#' data-bind='click: addProbePoint' class="fa fa-plus-circle"></a>{{ _('Add Point') }}
+       <a href='#' data-bind='click: addProbePoint' class="fa fa-plus-circle"></a> {{ _('Add Point') }}
      </div>
    </div>
+  </div>
+  <div class="tab-pane" id="conf">
+   <div class="control-group">
+      <textarea rows="32" class="block" data-bind="value: settings.settings.plugins.klipper.config"></textarea>
+   </div>
+  </div>
+</div>
 </form>

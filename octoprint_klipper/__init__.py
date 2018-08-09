@@ -5,6 +5,7 @@ import logging
 import octoprint.plugin
 import octoprint.plugin.core
 from octoprint.util.comm import parse_firmware_line
+import flask
 
 class KlipperPlugin(
       octoprint.plugin.StartupPlugin,
@@ -16,7 +17,7 @@ class KlipperPlugin(
    _parsingResponse = False
    _message = ""
 
-   #-- Startupt Plugin
+   #-- Startup Plugin
    
    def on_after_startup(self):
       klipperPort = self._settings.get(["serialport"])
@@ -26,10 +27,10 @@ class KlipperPlugin(
           additionalPorts.append(klipperPort)
           self._settings.global_set(["serial", "additionalPorts"], additionalPorts)
           self._settings.save()
-          self._logger.info("Added klipper serial port (%s) to list of additional ports." % klipperPort)
+          self._logger.info("Added klipper serial port {} to list of additional ports.".format(klipperPort))
 
    #-- Settings Plugin
-      
+
    def get_settings_defaults(self):
       return dict(
          serialport="/tmp/printer",
@@ -39,10 +40,61 @@ class KlipperPlugin(
          probeLift=5,
          probeSpeedXy=1500,
          probeSpeedZ=500,
-         probePoints=[{'x':0, 'y':0}])
-         
+         probePoints=[{'x':0, 'y':0}],
+         configPath="/home/pi/printer.cfg"
+      )
+
+   def on_settings_load(self):
+      data = octoprint.plugin.SettingsPlugin.on_settings_load(self)
+      f = open(self._settings.get(["configPath"]), "r")
+      if f:
+         data["config"] = f.read()
+         f.close()
+      else:
+         self._logger.info(
+            "Error: Klipper config file not found at: {}".format(self._settings.get(["configPath"]))
+         )
+      return data
+
+   def on_settings_save(self, data):
+      if "config" in data:
+         f = open(self._settings.get(["configPath"]), "w")
+         if f:
+            f.write(data["config"])
+            f.close()
+            self._logger.info(
+               "Write Klipper config to {}".format(self._settings.get(["configPath"]))
+            )
+            # Restart klipply to reload config
+            self._printer.commands("RESTART")
+            self.logInfo("Reloading Klipper Configuration.")
+         else:
+            self._logger.info(
+               "Error: Couldn't write Klipper config file: {}".format(self._settings.get(["configPath"]))
+               )
+         data.pop('config', None) # we dont want to write the klipper conf to the octoprint settings
+      else:
+         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
+
+   def get_settings_restricted_paths(self):
+      return dict(
+         admin=[
+            ["serialport"],
+            ["configPath"],
+            ["replace_connection_panel"]
+         ],
+         user=[
+            ["macros"],
+            ["probeHeight"],
+            ["probeLift"],
+            ["probeSpeedXy"],
+            ["probeSpeedZ"],
+            ["probePoints"]
+         ]
+      )
+
    #-- Template Plugin
-   
+
    def get_template_configs(self):
       return [
            dict(type="navbar", custom_bindings=True),
@@ -77,7 +129,7 @@ class KlipperPlugin(
            self.updateStatus("info", "Connecting ...")
        elif "Connected" == event:
            self.updateStatus("info", "Connected to host")
-           self.logInfo("Connected to host via %s @%sbps" % (payload["port"], payload["baudrate"]))
+           self.logInfo("Connected to host via {} @{}bps".format(payload["port"], payload["baudrate"]))
        elif "Disconnected" == event:
            self.updateStatus("info", "Disconnected from host")
        elif "Error" == event:
@@ -89,29 +141,25 @@ class KlipperPlugin(
    def on_parse_gcode(self, comm, line, *args, **kwargs):
       if "FIRMWARE_VERSION" in line:
          printerInfo = parse_firmware_line(line)
-         
          if "FIRMWARE_VERSION" in printerInfo:
-             self.logInfo("Firmware version: %s" % printerInfo["FIRMWARE_VERSION"])
-             
+             self.logInfo("Firmware version: {}".format(printerInfo["FIRMWARE_VERSION"]))
       elif "//" in line:
-         self._parsingResponse = True
          self._message = self._message + line.strip('/')
-         
+         if not self._parsingResponse:
+            self.updateStatus("info", self._message)
+         self._parsingResponse = True
       else:
          if self._parsingResponse:
-             self._parsingResponse = False
-             self.logInfo(self._message)
-             self._message = ""
-             
+            self._parsingResponse = False
+            self.logInfo(self._message)
+            self._message = ""
          if "!!" in line:
-             msg = line.strip('!')
-             self.updateStatus("error", "Error")
-             self.logError(msg)
-             
+            msg = line.strip('!')
+            self.updateStatus("error", msg)
+            self.logError(msg)
       return line
 
    #-- Helpers
-   
    def sendMessage(self, type, subtype, payload):
        self._plugin_manager.send_plugin_message(
                 self._identifier,

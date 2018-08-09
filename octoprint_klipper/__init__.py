@@ -238,6 +238,19 @@ class KlipperPlugin(
             self.logError(msg)
       return line
 
+   def get_update_information(self):
+      return dict(
+         klipper=dict(
+            displayName=self._plugin_name,
+            displayVersion=self._plugin_version,
+            type="github_release",
+            current=self._plugin_version,
+            user="mmone",
+            repo="OctoprintKlipperPlugin",
+            pip="https://github.com/mmone/OctoPrintKlipper/archive/{target_version}.zip"
+         )
+      )
+    
    #-- Helpers
    def sendMessage(self, type, subtype, payload):
       self._plugin_manager.send_plugin_message(
@@ -271,6 +284,7 @@ def __plugin_load__():
 
    __plugin_implementation__ = KlipperPlugin()
    __plugin_hooks__ = {
-      "octoprint.comm.protocol.gcode.received": __plugin_implementation__.on_parse_gcode
+      "octoprint.comm.protocol.gcode.received": __plugin_implementation__.on_parse_gcode,
+      "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
    }
 

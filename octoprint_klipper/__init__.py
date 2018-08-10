@@ -55,7 +55,8 @@ class KlipperPlugin(
             )]
          ),
          configuration = dict(
-            path="/home/pi/printer.cfg"
+            path="/home/pi/printer.cfg",
+            reload_command="RESTART"
          )
       )
    
@@ -67,7 +68,9 @@ class KlipperPlugin(
          f.close()
       else:
          self._logger.info(
-            "Error: Klipper config file not found at: {}".format(self._settings.get(["config_path"]))
+            "Error: Klipper config file not found at: {}".format(
+               self._settings.get(["configuration", "path"])
+            )
          )
       return data
 
@@ -78,14 +81,18 @@ class KlipperPlugin(
             f.write(data["config"])
             f.close()
             self._logger.info(
-               "Write Klipper config to {}".format(self._settings.get(["config_path"]))
+               "Write Klipper config to {}".format(
+                  self._settings.get(["configuration", "path"])
+               )
             )
             # Restart klipply to reload config
-            self._printer.commands("RESTART")
+            self._printer.commands(self._settings.get(["configuration", "reload_command"]))
             self.logInfo("Reloading Klipper Configuration.")
          else:
             self._logger.info(
-               "Error: Couldn't write Klipper config file: {}".format(self._settings.get(["config_path"]))
+               "Error: Couldn't write Klipper config file: {}".format(
+                     self._settings.get(["configuration", "path"])
+                  )
                )
          data.pop("config", None) # we dont want to write the klipper conf to the octoprint settings
       else:

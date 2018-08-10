@@ -25,6 +25,15 @@
             <input type="text" class="input-block-level" data-bind="value: settings.settings.plugins.klipper.configuration.path">
         </div>
     </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('Configuration Reload Command') }}</label>
+        <div class="controls">
+           <select data-bind="value: settings.settings.plugins.klipper.configuration.reload_command">
+              <option value="RESTART">RESTART</option>
+              <option value="FIRMWARE_RESTART">FIRMWARE_RESTART</option>
+           </select>
+        </div>
+    </div>
   </div>
   <div class="tab-pane" id="macros">
     <div class="control-group">

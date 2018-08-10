@@ -3,7 +3,6 @@ $(function() {
     function KlipperSettingsViewModel(parameters) {
         var self = this;
         self.settings = parameters[0];
-        self.klipperConfig = ko.observable();
 
         self.addMacro = function() {
            self.settings.settings.plugins.klipper.macros.push({

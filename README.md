@@ -10,6 +10,7 @@ This plugin assists in managing and monitoring the [Klipper](https://github.com/
 - PID Tuning Dialog.
 - Dialog to set a coordinate offset for future GCODE move commands.
 - Message log displaying messages from Klipper prepended with "//" and "!!".
+- Basic Klipper configuration editor
 
 ### ToDo
 - Add a continously updated status display in octoprints navbar.

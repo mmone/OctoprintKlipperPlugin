@@ -39,3 +39,15 @@
 #plugin-klipper-config {
    font-family: monospace;
 }
+
+#klipper_graph_dialog form {
+	margin: 0;
+}
+
+#klipper_graph_dialog .graph-footer {
+   bottom:0;
+}
+
+#klipper_graph_dialog input {
+   display: inline-block;
+}

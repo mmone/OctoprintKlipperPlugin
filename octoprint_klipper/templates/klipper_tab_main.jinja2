@@ -12,29 +12,33 @@
   </div>
   <div class="span4">
     <div class="control-group">
-     <div class="controls">
+     <div class="control-group">
+        <div class="controls">
            <label class="control-label"></label>
-           <button class="btn btn-block" data-bind="click: onGetStatus, enable: isActive()"><i class="fa icon-black fa-info-circle"></i> {{ _('Get Status') }}</button>
+           <button class="btn btn-block btn-small" data-bind="click: onGetStatus, enable: isActive()"><i class="fa icon-black fa-info-circle"></i> {{ _('Get Status') }}</button>
+        </div>
      </div>
-     <div class="controls">
-          <hr>
-          <label class="control-label"><i class="icon-refresh"></i> {{ _('Restart') }}</label>
-          <button class="btn btn-block" data-bind="click: onRestartHost, enable: isActive()">{{ _('Host') }}</button>
-          <button class="btn btn-block" data-bind="click: onRestartFirmware, enable: isActive()">{{ _('Firmware') }}</button>
+     <div class="control-group">
+        <div class="controls">
+          <label class="control-label small"><i class="icon-refresh"></i> {{ _('Restart') }}</label>
+          <button class="btn btn-block btn-small" data-bind="click: onRestartHost, enable: isActive()">{{ _('Host') }}</button>
+          <button class="btn btn-block btn-small" data-bind="click: onRestartFirmware, enable: isActive()">{{ _('Firmware') }}</button>
+        </div>
      </div>
-     <div class="controls">
-         <hr>
+     <div class="control-group">
+        <div class="controls">
          <label class="control-label"><i class="icon-wrench"></i> {{ _('Tools') }}</label>
-         <button class="btn btn-block" data-bind="click: showLevelingDialog, enable: isActive()">{{ _('Assisted Bed Leveling') }}</button>
-         <button class="btn btn-block" data-bind="click: showPidTuningDialog, enable: isActive()">{{ _('PID Tuning') }}</button>
-         <button class="btn btn-block" data-bind="click: showOffsetDialog, enable: isActive()">{{ _('Coordinate Offset') }}</button>
+         <button class="btn btn-block btn-small" data-bind="click: showLevelingDialog, enable: isActive()">{{ _('Assisted Bed Leveling') }}</button>
+         <button class="btn btn-block btn-small" data-bind="click: showPidTuningDialog, enable: isActive()">{{ _('PID Tuning') }}</button>
+         <button class="btn btn-block btn-small" data-bind="click: showOffsetDialog, enable: isActive()">{{ _('Coordinate Offset') }}</button>
+         <button class="btn btn-block btn-small" data-bind="click: showGraphDialog, enable: isActive()">{{ _('Performance Graph') }}</button>
+        </div>
      </div>
      <div class="controls">
-         <hr>
          <label class="control-label"><i class="icon-list-alt"></i> {{ _('Macros') }}</label>
          <div data-bind="foreach: settings.settings.plugins.klipper.macros">
             <!-- ko if: tab -->
-            <button class="btn btn-block" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>
+            <button class="btn btn-block btn-small" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>
             <!-- /ko -->
          </div>
      </div>

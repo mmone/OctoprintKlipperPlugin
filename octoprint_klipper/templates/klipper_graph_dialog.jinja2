@@ -1,0 +1,27 @@
+<div id="klipper_graph_dialog" class="modal hide fade large" tabindex="-1" role="dialog" aria-labelledby="klipper_graph_dialog_label" aria-hidden="true">
+   <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal">&times;</button>
+       <h3 id="klipper_pid_tuning_dialog_label">{{ _('Performance Graph') }}</h3>
+   </div>
+   <div class="modal-body">
+      <div class="full-sized-box">
+         <script src="plugin/klipper/static/js/lib/Chart.bundle.min.js" type="text/javascript" defer></script>
+         <canvas id="klipper_graph_canvas"></canvas>
+      </div>
+      <span class="help-inline" style="display:block; position: absolute"><em>Click labels to hide/show dataset</em></span>
+   </div>
+   <div class="modal-footer">
+      <form class="form-inline">
+         <label class="checkbox">
+            <input type="checkbox" data-bind="checked: datasetFill, click: toggleDatasetFill" />{{ _('filled datasets') }}
+         </label>
+         <span class="help-inline" text-align="left" data-bind="text: status"></span>
+         <label class="control-label">
+            {{ _('Select Log') }}
+            <select data-bind="options: availableLogFiles, optionsText: 'name', optionsValue: 'file', value: logFile"></select>
+         </label>
+         <button class="btn" data-bind="click: loadData"><i class="icon-signal"> </i>{{ _('Analyze Log') }}</button>
+         <button class="btn" data-dismiss="modal"><i class="icon-remove"> </i>{{ _('Close') }}</button>
+      </form>
+   </div>
+</div>

@@ -5,35 +5,43 @@ $(function() {
         self.settings = parameters[0];
         self.loginState = parameters[1];
         self.connectionState = parameters[2];
-        
+
         self.shortStatus = ko.observable();
         self.logMessages = ko.observableArray();
 
         self.showLevelingDialog = function() {
            var dialog = $("#klipper_leveling_dialog");
            dialog.modal({
-                show: 'true',
-                backdrop: 'static',
-                keyboard: false
+              show: 'true',
+              backdrop: 'static',
+              keyboard: false
             });
         }
         
         self.showPidTuningDialog = function() {
            var dialog = $("#klipper_pid_tuning_dialog");
            dialog.modal({
-                show: 'true',
-                backdrop: 'static',
-                keyboard: false
-            });;
+              show: 'true',
+              backdrop: 'static',
+              keyboard: false
+           });
         }
         
         self.showOffsetDialog = function() {
            var dialog = $("#klipper_offset_dialog");
            dialog.modal({
-                show: 'true',
-                backdrop: 'static',
-                keyboard: false
-            });;
+              show: 'true',
+              backdrop: 'static'
+           });
+        }
+        
+        self.showGraphDialog = function() {
+           var dialog = $("#klipper_graph_dialog");
+           dialog.modal({
+              show: 'true',
+              minHeight: "500px",
+              maxHeight: "600px"
+           });
         }
         
         self.executeMacro = function(macro) {	

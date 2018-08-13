@@ -11,17 +11,21 @@ This plugin assists in managing and monitoring the [Klipper](https://github.com/
 - Dialog to set a coordinate offset for future GCODE move commands.
 - Message log displaying messages from Klipper prepended with "//" and "!!".
 - Basic Klipper configuration editor
+- Performance graph displaying key parameters extracted from the Klipper logs.
 
 ### ToDo
 - Add a continously updated status display in octoprints navbar.
 
-## Setup
+## Installation
 
-Install via the bundled [Plugin Manager](https://github.com/foosel/OctoPrint/wiki/Plugin:-Plugin-Manager)
+Install via OctoPrints [Plugin Manager](http://docs.octoprint.org/en/master/bundledplugins/pluginmanager.html)
 or manually using this URL:
 
     https://github.com/mmone/OctoPrintKlipper/archive/master.zip
 
+## Update
+
+OctoPrint will inform you when a new version of this plugin becomes available.
 
 ## Configuration
 
@@ -48,3 +52,7 @@ Also for the moment this plugin does what I wanted it to do, it is far from fini
 
 #### Settings
 ![Settings](docs/assets/img/settings.png)
+
+#### Performance Graph
+![Settings](docs/assets/img/performance-graph.png)
+

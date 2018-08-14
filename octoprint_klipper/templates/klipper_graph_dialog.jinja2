@@ -20,6 +20,7 @@
             {{ _('Select Log') }}
             <select data-bind="options: availableLogFiles, optionsText: 'name', optionsValue: 'file', value: logFile"></select>
          </label>
+         <button class="btn" data-bind="click: listLogFiles" title="Reload file list"><i class="icon-refresh"></i></button>
          <button class="btn" data-bind="click: loadData"><i class="icon-signal"> </i>{{ _('Analyze Log') }}</button>
          <button class="btn" data-dismiss="modal"><i class="icon-remove"> </i>{{ _('Close') }}</button>
       </form>

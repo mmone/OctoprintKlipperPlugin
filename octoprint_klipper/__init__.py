@@ -8,6 +8,7 @@ import glob
 import os
 from octoprint.util.comm import parse_firmware_line
 from .modules import KlipperLogAnalyzer
+from .modules.klipper.parser import Parser
 import flask
 
 class KlipperPlugin(
@@ -59,45 +60,46 @@ class KlipperPlugin(
             )]
          ),
          configuration = dict(
-            path="/home/pi/printer.cfg",
+            path="~/printer.cfg",
             reload_command="RESTART"
          )
       )
    
    def on_settings_load(self):
       data = octoprint.plugin.SettingsPlugin.on_settings_load(self)
-      f = open(self._settings.get(["configuration", "path"]), "r")
-      if f:
+      
+      filepath = os.path.expanduser(
+         self._settings.get(["configuration", "path"])
+      )
+      try:
+         f = open(filepath, "r")
          data["config"] = f.read()
          f.close()
-      else:
-         self._logger.info(
-            "Error: Klipper config file not found at: {}".format(
-               self._settings.get(["configuration", "path"])
-            )
+      except IOError:
+         self._logger.error(
+            "Error: Klipper config file not found at: {}".format(filepath)
          )
       return data
 
    def on_settings_save(self, data):
       if "config" in data:
-         f = open(self._settings.get(["configuration", "path"]), "w")
-         if f:
+         try:
+            filepath = os.path.expanduser(
+               self._settings.get(["configuration", "path"])
+            )
+            f = open(filepath)
             f.write(data["config"])
             f.close()
             self._logger.info(
-               "Write Klipper config to {}".format(
-                  self._settings.get(["configuration", "path"])
-               )
+               "Write Klipper config to {}".format(filepath)
             )
             # Restart klipply to reload config
             self._printer.commands(self._settings.get(["configuration", "reload_command"]))
             self.logInfo("Reloading Klipper Configuration.")
-         else:
-            self._logger.info(
-               "Error: Couldn't write Klipper config file: {}".format(
-                     self._settings.get(["configuration", "path"])
-                  )
-               )
+         except IOError:
+            self._logger.error(
+               "Error: Couldn't write Klipper config file: {}".format(filepath)
+            )
          data.pop("config", None) # we dont want to write the klipper conf to the octoprint settings
       else:
          octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
@@ -260,7 +262,8 @@ class KlipperPlugin(
    def get_api_commands(self):
       return dict(
          listLogFiles=[],
-         getStats=["logFile"]
+         getStats=["logFile"],
+         loadConfig=["configFile"]
       )
       
    def on_api_command(self, command, data):
@@ -278,7 +281,11 @@ class KlipperPlugin(
          if "logFile" in data:
             log_analyzer = KlipperLogAnalyzer.KlipperLogAnalyzer(data["logFile"])
             return flask.jsonify(log_analyzer.analyze())
-            
+      elif command == "loadConfig":
+         kc = Parser()
+         sections = kc.load(data["configFile"])
+         return flask.jsonify(sections)
+         
    def on_api_get(self, request):
       log_analyzer = KlipperLogAnalyzer.KlipperLogAnalyzer("/tmp/klippy.log.2018-08-06")
       
@@ -319,8 +326,6 @@ class KlipperPlugin(
 
    def logError(self, error):
       self.sendMessage("log", "error", error)
-
-
 
 __plugin_name__ = "Klipper"
 

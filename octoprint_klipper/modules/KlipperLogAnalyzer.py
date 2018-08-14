@@ -30,33 +30,36 @@ class KlipperLogAnalyzer():
          mcu = "mcu"
       mcu_prefix = mcu + ":"
       apply_prefix = { p: 1 for p in self.APPLY_PREFIX }
-      
-      f = open(logname, 'rb')
       out = []
       
-      for line in f:
-         parts = line.split()
-         if not parts or parts[0] not in ('Stats', 'INFO:root:Stats'):
-            #if parts and parts[0] == 'INFO:root:shutdown:':
-            #    break
-            continue
-         prefix = ""
-         keyparts = {}
-         for p in parts[2:]:
-            if '=' not in p:
-               prefix = p
-               if prefix == mcu_prefix:
-                  prefix = ''
+      try:
+         f = open(logname, 'rb')
+      
+         for line in f:
+            parts = line.split()
+            if not parts or parts[0] not in ('Stats', 'INFO:root:Stats'):
+               #if parts and parts[0] == 'INFO:root:shutdown:':
+               #    break
                continue
-            name, val = p.split('=', 1)
-            if name in apply_prefix:
-               name = prefix + name
-            keyparts[name] = val
-         if keyparts.get('bytes_write', '0') == '0':
-            continue
-         keyparts['#sampletime'] = float(parts[1][:-1])
-         out.append(keyparts)
-      f.close()
+            prefix = ""
+            keyparts = {}
+            for p in parts[2:]:
+               if '=' not in p:
+                  prefix = p
+                  if prefix == mcu_prefix:
+                     prefix = ''
+                  continue
+               name, val = p.split('=', 1)
+               if name in apply_prefix:
+                  name = prefix + name
+               keyparts[name] = val
+            if keyparts.get('bytes_write', '0') == '0':
+               continue
+            keyparts['#sampletime'] = float(parts[1][:-1])
+            out.append(keyparts)
+         f.close()
+      except IOError:
+          print("Couldn't open log file")
       return out
 
    def find_print_restarts(self, data):

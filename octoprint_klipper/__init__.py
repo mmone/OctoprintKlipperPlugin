@@ -87,11 +87,11 @@ class KlipperPlugin(
             filepath = os.path.expanduser(
                self._settings.get(["configuration", "path"])
             )
-            f = open(filepath)
+            f = open(filepath, "w")
             f.write(data["config"])
             f.close()
             self._logger.info(
-               "Write Klipper config to {}".format(filepath)
+               "Writing Klipper config to {}".format(filepath)
             )
             # Restart klipply to reload config
             self._printer.commands(self._settings.get(["configuration", "reload_command"]))
@@ -285,12 +285,7 @@ class KlipperPlugin(
          kc = Parser()
          sections = kc.load(data["configFile"])
          return flask.jsonify(sections)
-         
-   def on_api_get(self, request):
-      log_analyzer = KlipperLogAnalyzer.KlipperLogAnalyzer("/tmp/klippy.log.2018-08-06")
-      
-      return log_analyzer.analyze()
-        
+
    def get_update_information(self):
       return dict(
          klipper=dict(

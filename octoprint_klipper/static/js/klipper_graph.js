@@ -14,14 +14,16 @@ function KlipperGraphViewModel(parameters) {
    self.logFile = ko.observable();
    self.status = ko.observable();
    self.datasets = ko.observableArray();
+   self.datasetFill = ko.observable(false);
    self.canvas;
    self.canvasContext;
    self.chart;
-   self.datasetFill = ko.observable(false);
+   self.spinnerDialog;
    
    self.onStartup = function() {
       self.canvas = $("#klipper_graph_canvas")[0]
       self.canvasContext = self.canvas.getContext("2d");
+      self.spinnerDialog = $("#klipper_graph_spinner");
       
       Chart.defaults.global.elements.line.borderWidth=1;
       Chart.defaults.global.elements.line.fill= false;
@@ -55,6 +57,18 @@ function KlipperGraphViewModel(parameters) {
       button.attr("href", dataURL);
    }
    
+   self.showSpinner = function(showDialog) {
+      if (showDialog) {
+         self.spinnerDialog.modal({
+            show: true,
+            keyboard: false,
+            backdrop: "static" 
+         });
+      } else {
+         self.spinnerDialog.modal("hide");
+      }
+   }
+   
    self.toggleDatasetFill = function() {
       if(self.datasets) {
          for (i=0; i < self.datasets().length; i++) {
@@ -84,10 +98,15 @@ function KlipperGraphViewModel(parameters) {
            }
         )
       }
-
+      
+      self.showSpinner(true);
+      
       $.ajax(settings).done(function (response) {
          self.status("")
          self.datasetFill(false);
+         
+         self.showSpinner(false);
+         
          if("error" in response) {
             self.status(response.error);
          } else {

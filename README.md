@@ -53,6 +53,9 @@ Also for the moment this plugin does what I wanted it to do, it is far from fini
 #### Settings
 ![Settings](docs/assets/img/settings.png)
 
+#### Klipper Config
+![Klipper Config](docs/assets/img/klipper-config.png)
+
 #### Performance Graph
-![Settings](docs/assets/img/performance-graph.png)
+![Performance Grap](docs/assets/img/performance-graph.png)
 

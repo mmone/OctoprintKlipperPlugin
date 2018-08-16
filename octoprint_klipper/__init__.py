@@ -8,7 +8,6 @@ import glob
 import os
 from octoprint.util.comm import parse_firmware_line
 from .modules import KlipperLogAnalyzer
-from .modules.klipper.parser import Parser
 import flask
 
 class KlipperPlugin(

@@ -51,3 +51,16 @@
 #klipper_graph_dialog input {
    display: inline-block;
 }
+
+#klipper_graph_dialog .status-label {
+   display: block;
+   position: absolute;
+   margin: 5px 0 0 10px;
+}
+
+#klipper_graph_dialog .fill-checkbox {
+   display: block;
+   position: absolute;
+   bottom: 5px;
+   margin-left: 10px;
+}

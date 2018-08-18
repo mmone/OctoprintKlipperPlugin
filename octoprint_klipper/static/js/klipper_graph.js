@@ -2,13 +2,12 @@ $(function() {
 
 function KlipperGraphViewModel(parameters) {
    var self = this;
-   self.header = {
-      "x-api-key": "2CE2F6BA87244897B7F3A1BED3B1A3ED",
+
+   self.header = OctoPrint.getRequestHeaders({
       "content-type": "application/json",
       "cache-control": "no-cache"
-   }
-   
-   self.apiUrl = "/api/plugin/klipper"
+   });
+   self.apiUrl = OctoPrint.getSimpleApiUrl("klipper");
    
    self.availableLogFiles = ko.observableArray();
    self.logFile = ko.observable();
@@ -37,6 +36,7 @@ function KlipperGraphViewModel(parameters) {
    
    self.listLogFiles = function() {
       var settings = {
+        "crossDomain": true,
         "url": self.apiUrl,
         "method": "POST",
         "headers": self.header,
@@ -116,6 +116,7 @@ function KlipperGraphViewModel(parameters) {
                label: "MCU Load",
                backgroundColor: "rgba(199, 44, 59, 0.5)",
                borderColor: "rgb(199, 44, 59)",
+               yAxisID: 'y-axis-1',
                data: response.loads
             });
             
@@ -124,6 +125,7 @@ function KlipperGraphViewModel(parameters) {
                label: "Bandwith",
                backgroundColor: "rgba(255, 130, 1, 0.5)",
                borderColor: "rgb(255, 130, 1)",
+               yAxisID: 'y-axis-1',
                data: response.bwdeltas
             });
             
@@ -132,6 +134,7 @@ function KlipperGraphViewModel(parameters) {
                label: "Host Buffer",
                backgroundColor: "rgba(0, 145, 106, 0.5)",
                borderColor: "rgb(0, 145, 106)",
+               yAxisID: 'y-axis-1',
                data: response.buffers
             });
             
@@ -140,9 +143,19 @@ function KlipperGraphViewModel(parameters) {
                label: "Awake Time",
                backgroundColor: "rgba(33, 64, 95, 0.5)",
                borderColor: "rgb(33, 64, 95)",
+               yAxisID: 'y-axis-1',
                data: response.awake
             });
-         
+            
+//            self.datasets.push(
+//            {
+//               label: "Frequency",
+//               backgroundColor: "rgba(33, 64, 95, 0.5)",
+//               borderColor: "rgb(33, 64, 95)",
+//               yAxisID: 'y-axis-2',
+//               data: response.frequency
+//            });
+            
             self.chart = new Chart(self.canvas, {
                type: "line",
                data: {
@@ -176,8 +189,19 @@ function KlipperGraphViewModel(parameters) {
                         scaleLabel: {
                            display: true,
                            labelString: '%'
-                        }
-                     }]
+                        },
+                        position: 'left',
+                        id: 'y-axis-1'
+                     }
+//                   {
+//                     scaleLabel: {
+//                        display: true,
+//                       labelString: 'MHz'
+//                     },
+//                     position: 'right',
+//                     id: 'y-axis-2'
+//                   }
+                     ]
                   },
                   legend: {
                      

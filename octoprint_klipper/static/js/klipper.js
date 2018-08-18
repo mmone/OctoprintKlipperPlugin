@@ -5,17 +5,19 @@ $(function() {
         self.settings = parameters[0];
         self.loginState = parameters[1];
         self.connectionState = parameters[2];
-
+        self.levelingViewModel = parameters[3];
+        
         self.shortStatus = ko.observable();
         self.logMessages = ko.observableArray();
-
+        
         self.showLevelingDialog = function() {
            var dialog = $("#klipper_leveling_dialog");
            dialog.modal({
               show: 'true',
               backdrop: 'static',
               keyboard: false
-            });
+           });
+           self.levelingViewModel.initView();
         }
         
         self.showPidTuningDialog = function() {
@@ -89,7 +91,7 @@ $(function() {
 
     OCTOPRINT_VIEWMODELS.push({
         construct: KlipperViewModel,
-        dependencies: ["settingsViewModel", "loginStateViewModel", "connectionViewModel"],
+        dependencies: ["settingsViewModel", "loginStateViewModel", "connectionViewModel", "klipperLevelingViewModel"],
         elements: ["#tab_plugin_klipper_main", "#sidebar_plugin_klipper", "#navbar_plugin_klipper"]
     });
 });

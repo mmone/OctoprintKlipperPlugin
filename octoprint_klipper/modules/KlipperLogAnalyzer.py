@@ -17,12 +17,9 @@ class KlipperLogAnalyzer():
    def analyze(self):
       data = self.parse_log(self.log_file, None)
       if not data:
-         result = dict(error= "Couldn't parse \"{}\"".format(self.log_file))
+         result = dict(error= "No relevant data available in \"{}\"".format(self.log_file))
       else:
          result = self.plot_mcu(data, self.MAXBANDWIDTH)
-      #if options.frequency:
-      #    plot_frequency(data, outname, options.mcu)
-      #    return
       return result
 
    def parse_log(self, logname, mcu):
@@ -119,14 +116,13 @@ class KlipperLogAnalyzer():
          else:
             hb = 100. * (self.MAXBUFFER - hb) / self.MAXBUFFER
          hostbuffers.append(hb)
-         #times.append(datetime.datetime.utcfromtimestamp(st))
          times.append(st)
          bwdeltas.append(100. * (bw - lastbw) / (maxbw * timedelta))
          loads.append(100. * load / self.TASK_MAX)
          awake.append(100. * float(d.get('mcu_awake', 0.)) / self.STATS_INTERVAL)
          lasttime = st
          lastbw = bw
-         
+      
       result = dict(
          times= times,
          bwdeltas= bwdeltas,
@@ -151,4 +147,6 @@ class KlipperLogAnalyzer():
             val = d.get(key)
             if val not in (None, '0', '1'):
                times.append(st)
-               values.append(float(val))
+               values.append(float(val)/1000000.0)
+               
+      return values

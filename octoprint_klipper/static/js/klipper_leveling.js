@@ -3,14 +3,18 @@ $(function() {
         var self = this;
         self.settings = parameters[0];
         self.loginState = parameters[1];
-        self.connectionState = parameters[2];
         
-        self.activePoint = ko.observable();
+        self.activePoint = ko.observable(-1);
+        self.pointCount = ko.observable();
+        self.points = ko.observableArray();
         
-        self.onStartup = function() {
-           self.activePoint(-1);
+        self.initView = function() {
+           self.points(self.settings.settings.plugins.klipper.probe.points());
+           self.pointCount(
+             self.points().length
+           );
         }
-        
+
         self.startLeveling = function() {
            OctoPrint.control.sendGcode("G28")
            self.moveToPoint(0);
@@ -39,14 +43,14 @@ $(function() {
         
         self.jumpToPoint = function(item) {
            self.moveToPoint(
-              self.settings.settings.plugins.klipper.probe.points().indexOf(item)
+              self.points().indexOf(item)
            );
         }
-        
+        /*
         self.pointCount = function() {
            return self.settings.settings.plugins.klipper.probe.points().length;
         }
-        
+        */
         self.moveToPosition = function(x, y) {
            OctoPrint.control.sendGcode( 
               "G1 Z" + (self.settings.settings.plugins.klipper.probe.height() * 1 + 
@@ -64,7 +68,7 @@ $(function() {
         }
         
         self.moveToPoint = function(index) {
-           var point = self.settings.settings.plugins.klipper.probe.points()[index];
+           var point = self.points()[index];
 
            self.moveToPosition(point.x(), point.y());
            self.activePoint(index);
@@ -73,7 +77,7 @@ $(function() {
 
     OCTOPRINT_VIEWMODELS.push({
         construct: KlipperLevelingViewModel,
-        dependencies: ["settingsViewModel", "loginStateViewModel", "connectionViewModel"],
+        dependencies: ["settingsViewModel", "loginStateViewModel"],
         elements: ["#klipper_leveling_dialog"]
     });
 });

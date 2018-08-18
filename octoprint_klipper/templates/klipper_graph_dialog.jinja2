@@ -9,15 +9,15 @@
          <canvas id="klipper_graph_canvas"></canvas>
       </div>
       <span class="help-inline" style="display:block; position: absolute"><em>Click labels to hide/show dataset</em></span>
+      <label class="checkbox fill-checkbox">
+         <input type="checkbox" data-bind="checked: datasetFill, click: toggleDatasetFill" />{{ _('Fill Datasets') }}
+      </label>
    </div>
    <div class="modal-footer">
       <form class="form-inline">
-         <label class="checkbox">
-            <input type="checkbox" data-bind="checked: datasetFill, click: toggleDatasetFill" />{{ _('filled datasets') }}
-         </label>
-         <span class="help-inline" text-align="left" data-bind="text: status"></span>
+         <span text-align="left" data-bind="text: status" class="status-label"></span>
          <label class="control-label">
-            {{ _('Select Log') }}
+            {{ _('Select') }}
             <select data-bind="options: availableLogFiles, optionsText: 'name', optionsValue: 'file', value: logFile"></select>
          </label>
          <button class="btn" data-bind="click: listLogFiles" title="Reload file list"><i class="icon-refresh"></i></button>

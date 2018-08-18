@@ -2,11 +2,13 @@ $(function() {
 
 function KlipperGraphViewModel(parameters) {
    var self = this;
-
+   self.loginState = parameters[0];
+   
    self.header = OctoPrint.getRequestHeaders({
       "content-type": "application/json",
       "cache-control": "no-cache"
    });
+   
    self.apiUrl = OctoPrint.getSimpleApiUrl("klipper");
    
    self.availableLogFiles = ko.observableArray();
@@ -18,7 +20,7 @@ function KlipperGraphViewModel(parameters) {
    self.canvasContext;
    self.chart;
    self.spinnerDialog;
-   
+
    self.onStartup = function() {
       self.canvas = $("#klipper_graph_canvas")[0]
       self.canvasContext = self.canvas.getContext("2d");
@@ -31,6 +33,13 @@ function KlipperGraphViewModel(parameters) {
       var myChart = new Chart(self.canvas, {
          type: "line"
       });
+      
+      if(self.loginState.loggedIn()) {
+         self.listLogFiles();
+      }
+   }
+   
+   self.onUserLoggedIn = function(user) {
       self.listLogFiles();
    }
    
@@ -147,15 +156,6 @@ function KlipperGraphViewModel(parameters) {
                data: response.awake
             });
             
-//            self.datasets.push(
-//            {
-//               label: "Frequency",
-//               backgroundColor: "rgba(33, 64, 95, 0.5)",
-//               borderColor: "rgb(33, 64, 95)",
-//               yAxisID: 'y-axis-2',
-//               data: response.frequency
-//            });
-            
             self.chart = new Chart(self.canvas, {
                type: "line",
                data: {
@@ -193,14 +193,6 @@ function KlipperGraphViewModel(parameters) {
                         position: 'left',
                         id: 'y-axis-1'
                      }
-//                   {
-//                     scaleLabel: {
-//                        display: true,
-//                       labelString: 'MHz'
-//                     },
-//                     position: 'right',
-//                     id: 'y-axis-2'
-//                   }
                      ]
                   },
                   legend: {
@@ -215,7 +207,7 @@ function KlipperGraphViewModel(parameters) {
 
 OCTOPRINT_VIEWMODELS.push({
       construct: KlipperGraphViewModel,
-      dependencies: [],
+      dependencies: ["loginStateViewModel"],
       elements: ["#klipper_graph_dialog"]
    });
 });

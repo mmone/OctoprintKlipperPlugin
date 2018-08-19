@@ -1,3 +1,9 @@
+// OctoPrint Klipper Plugin
+//
+// Copyright (C) 2018  Martin Muehlhaeuser <github@mmone.de>
+//
+// This file may be distributed under the terms of the GNU GPLv3 license.
+
 $(function() {
     $('#klipper-settings a:first').tab('show');
     function KlipperSettingsViewModel(parameters) {

@@ -13,9 +13,6 @@ This plugin assists in managing and monitoring the [Klipper](https://github.com/
 - Basic Klipper configuration editor
 - Performance graph displaying key parameters extracted from the Klipper logs.
 
-### ToDo
-- Add a continously updated status display in octoprints navbar.
-
 ## Installation
 
 Install via OctoPrints [Plugin Manager](http://docs.octoprint.org/en/master/bundledplugins/pluginmanager.html)

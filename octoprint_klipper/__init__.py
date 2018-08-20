@@ -327,8 +327,6 @@ class KlipperPlugin(
    def logError(self, error):
       self.sendMessage("log", "error", error)
 
-__plugin_name__ = "Klipper"
-
 def __plugin_load__():
    global __plugin_implementation__
    global __plugin_hooks__

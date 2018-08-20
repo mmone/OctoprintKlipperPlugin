@@ -26,7 +26,7 @@ OctoPrint will inform you when a new version of this plugin becomes available.
 
 ## Configuration
 
-Click on the wrench icon in the titlebar to open OctoPrints settings dialog. Select "Klipper" at the bottom of the settings dialog.
+Click on the wrench icon in the titlebar to open OctoPrints settings dialog. Select "OctoKlipper" at the bottom of the settings dialog.
 
 ## Contributions
 

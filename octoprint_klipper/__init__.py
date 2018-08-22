@@ -311,6 +311,7 @@ class KlipperPlugin(
          dict(
             time=datetime.datetime.now().strftime("%H:%M:%S"),
             type=type,
+            subtype=subtype,
             payload=payload
          )
       )

@@ -15,7 +15,10 @@ This plugin assists in managing and monitoring the [Klipper](https://github.com/
 
 ## Installation
 
-Install via OctoPrints [Plugin Manager](http://docs.octoprint.org/en/master/bundledplugins/pluginmanager.html)
+Search for "Klipper" in OctoPrints Plugin Manager.
+
+![Message Log](docs/assets/img/install.png)
+
 or manually using this URL:
 
     https://github.com/mmone/OctoPrintKlipper/archive/master.zip

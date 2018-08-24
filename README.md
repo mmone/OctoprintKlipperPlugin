@@ -19,7 +19,7 @@ Search for "Klipper" in OctoPrints Plugin Manager.
 
 ![Message Log](docs/assets/img/install.png)
 
-or manually using this URL:
+or install manually using this URL / zip:
 
     https://github.com/mmone/OctoPrintKlipper/archive/master.zip
 

@@ -32,6 +32,9 @@
               <option value="RESTART">RESTART</option>
               <option value="FIRMWARE_RESTART">FIRMWARE_RESTART</option>
            </select>
+           <span class="help-block">
+              The command that is executed when the Klipper configuration changed and needs to be reloaded.
+           </span>
         </div>
     </div>
   </div>
@@ -86,13 +89,19 @@
   </div>
   <div class="tab-pane" id="level">
     <div class="control-group">
+       <span class="help-block">
+           This feature assists in manually leveling you print bed by moving the head to the defined points in sequence.<br>
+           If you use a piece of paper for leveling, set "Probe Height" to the paper thickness eg. "0.1".
+        </span>
+    </div>
+    <div class="control-group">
       <label class="control-label">{{ _('Probe Height') }}</label>
       <div class="controls">
          <div class="input-append">
             <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probe.height">
             <span class="add-on">mm</span>
          </div>
-         <span class="help-inline">{{ _('Z-height to probe at.') }}</span>
+         <span class="help-inline">{{ _('Z-height to probe at') }}</span>
       </div>
     </div>
     <div class="control-group">
@@ -102,7 +111,7 @@
            <input type="text" class="input-block-level span3" data-bind="value: settings.settings.plugins.klipper.probe.lift">
            <span class="add-on">mm</span>
          </div>
-         <span class="help-inline">{{ _('Lift Z before moving to next point.') }}</span>
+         <span class="help-inline">{{ _('Lift Head by this amount before moving.') }}</span>
       </div>
     </div>
     <div class="control-group">

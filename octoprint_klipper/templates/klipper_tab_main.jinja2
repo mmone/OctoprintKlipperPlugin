@@ -8,37 +8,62 @@
       </div>
     </div>
     &nbsp;
-    <button class="btn btn-mini pull-right clear-btn" data-bind="click: onClearLog, enable: isActive()"><i class="fa fa-trash"></i> {{ _('Clear') }}</button>
+    <button class="btn btn-mini pull-right clear-btn" data-bind="click: onClearLog, enable: isActive()"
+       title="Clear Log">
+       <i class="fa fa-trash"></i> {{ _('Clear') }}
+    </button>
   </div>
   <div class="span4">
     <div class="control-group">
      <div class="control-group">
         <div class="controls">
            <label class="control-label"></label>
-           <button class="btn btn-block btn-small" data-bind="click: onGetStatus, enable: isActive()"><i class="fa icon-black fa-info-circle"></i> {{ _('Get Status') }}</button>
+           <button class="btn btn-block btn-small" data-bind="click: onGetStatus, enable: isActive()"
+              title="Query Klipper for its current status">
+              <i class="fa icon-black fa-info-circle"></i> {{ _('Get Status') }}
+           </button>
         </div>
      </div>
      <div class="control-group">
         <div class="controls">
           <label class="control-label small"><i class="icon-refresh"></i> {{ _('Restart') }}</label>
-          <button class="btn btn-block btn-small" data-bind="click: onRestartHost, enable: isActive()">{{ _('Host') }}</button>
-          <button class="btn btn-block btn-small" data-bind="click: onRestartFirmware, enable: isActive()">{{ _('Firmware') }}</button>
+          <button class="btn btn-block btn-small" data-bind="click: onRestartHost, enable: isActive()"
+             title="This will cause the host software to reload its config and perform an internal reset">
+             {{ _('Host') }}
+          </button>
+          <button class="btn btn-block btn-small" data-bind="click: onRestartFirmware, enable: isActive()"
+             title="Similar to a host restart, but also clears any error state from the micro-controller">
+             {{ _('Firmware') }}
+          </button>
         </div>
      </div>
      <div class="control-group">
         <div class="controls">
          <label class="control-label"><i class="icon-wrench"></i> {{ _('Tools') }}</label>
-         <button class="btn btn-block btn-small" data-bind="click: showLevelingDialog, enable: isActive()">{{ _('Assisted Bed Leveling') }}</button>
-         <button class="btn btn-block btn-small" data-bind="click: showPidTuningDialog, enable: isActive()">{{ _('PID Tuning') }}</button>
-         <button class="btn btn-block btn-small" data-bind="click: showOffsetDialog, enable: isActive()">{{ _('Coordinate Offset') }}</button>
-         <button class="btn btn-block btn-small" data-bind="click: showGraphDialog, enable: isActive()">{{ _('Performance Graph') }}</button>
+         <button class="btn btn-block btn-small" data-bind="click: showLevelingDialog, enable: isActive()"
+            title="Assists in manually leveling your printbed by moving the head to a configurable set of positions in sequence.">
+            {{ _('Assisted Bed Leveling') }}
+         </button>
+         <button class="btn btn-block btn-small" data-bind="click: showPidTuningDialog, enable: isActive()"
+            title="Determines optimal PID parameters by heat cycling the hotend/bed.">
+            {{ _('PID Tuning') }}
+         </button>
+         <button class="btn btn-block btn-small" data-bind="click: showOffsetDialog, enable: isActive()"
+            title="Sets a offset for subsequent GCODE coordinates.">
+            {{ _('Coordinate Offset') }}
+         </button>
+         <button class="btn btn-block btn-small" data-bind="click: showGraphDialog, enable: isActive()"
+            title="Assists in debugging performance issues by analyzing the Klipper log files.">
+            {{ _('Performance Graph') }}
+         </button>
         </div>
      </div>
      <div class="controls">
          <label class="control-label"><i class="icon-list-alt"></i> {{ _('Macros') }}</label>
          <div data-bind="foreach: settings.settings.plugins.klipper.macros">
             <!-- ko if: tab -->
-            <button class="btn btn-block btn-small" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()"></button>
+            <button class="btn btn-block btn-small" data-bind="text: name, click: $parent.executeMacro, enable: $parent.isActive()">
+            </button>
             <!-- /ko -->
          </div>
      </div>

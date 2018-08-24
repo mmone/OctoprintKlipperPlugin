@@ -8,7 +8,9 @@
          <script src="plugin/klipper/static/js/lib/Chart.bundle.min.js" type="text/javascript" defer></script>
          <canvas id="klipper_graph_canvas"></canvas>
       </div>
-      <span class="help-inline" style="display:block; position: absolute"><em>Click labels to hide/show dataset</em></span>
+      <span class="help-inline" style="display:block; position: absolute">
+         <em>Click labels to hide/show dataset</em>
+      </span>
       <label class="checkbox fill-checkbox">
          <input type="checkbox" data-bind="checked: datasetFill, click: toggleDatasetFill" />{{ _('Fill Datasets') }}
       </label>
@@ -20,7 +22,7 @@
             {{ _('Select') }}
             <select data-bind="options: availableLogFiles, optionsText: 'name', optionsValue: 'file', value: logFile"></select>
          </label>
-         <button class="btn" data-bind="click: listLogFiles" title="Reload file list"><i class="icon-refresh"></i></button>
+         <button class="btn" data-bind="click: listLogFiles" title="Refresh file list"><i class="icon-refresh"></i></button>
          <button class="btn" data-bind="click: loadData"><i class="icon-signal"> </i>{{ _('Analyze Log') }}</button>
          <button class="btn" data-dismiss="modal"><i class="icon-remove"> </i>{{ _('Close') }}</button>
       </form>
@@ -28,7 +30,7 @@
 </div>
 <div id="klipper_graph_spinner" class="modal hide fade small" tabindex="-1" role="dialog" aria-hidden="true">
    <img src="plugin/klipper/static/img/spinner.gif" width="100" height="100">
-   <span class="help-inline" text-align="left">
+   <span class="help-inline">
       Depending on the size of the log file this might take a while.
    </span>
 </div>

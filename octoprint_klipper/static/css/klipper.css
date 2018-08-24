@@ -64,3 +64,7 @@
    bottom: 5px;
    margin-left: 10px;
 }
+
+#klipper_graph_canvas {
+   margin-top: 15px;
+}

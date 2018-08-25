@@ -5,7 +5,7 @@ This plugin assists in managing and monitoring the [Klipper](https://github.com/
 ### Features
 - Simplified connection dialog.
 - Restart Host and MCU processes.
-- User defineable macro buttons.
+- User defineable macro buttons with optional parameter dialogs.
 - Assisted bed leveling wizard with user definable probe points.
 - PID Tuning Dialog.
 - Dialog to set a coordinate offset for future GCODE move commands.

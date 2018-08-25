@@ -209,6 +209,12 @@ class KlipperPlugin(
             name="Performance Graph",
             template="klipper_graph_dialog.jinja2",
             custom_bindings=True
+         ),
+         dict(
+            type="generic",
+            name="Macro Dialog",
+            template="klipper_param_macro_dialog.jinja2",
+            custom_bindings=True
          )
       ]
    
@@ -221,6 +227,7 @@ class KlipperPlugin(
              "js/klipper_leveling.js",
              "js/klipper_pid_tuning.js",
              "js/klipper_offset.js",
+             "js/klipper_param_macro.js",
              "js/klipper_graph.js"
          ],
          css=["css/klipper.css"],

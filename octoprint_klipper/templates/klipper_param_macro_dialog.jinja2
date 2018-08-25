@@ -1,0 +1,32 @@
+<div id="klipper_macro_dialog" class="modal hide fade small" tabindex="-1" role="dialog" aria-labelledby="klipper_macro_dialog_label" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 id="klipper_pid_tuning_dialog_label">{{ _('Run - ') }}<span data-bind="text: macroName"></span></h3>
+    </div>
+    <div class="modal-body">
+       <div class="control-group" data-bind="foreach: parameters">
+         <label class="control-label" data-bind="text: label"></label>
+         <div class="controls">
+            <!-- ko if: $data.hasOwnProperty("options") -->
+            <div class="input-append">
+               <select data-bind="options: options, value: value"></select>
+               <span class="add-on" data-bind="text: unit"></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: !$data.hasOwnProperty("options") -->
+            <div class="input-append">
+               <input type="text" class="input-block-level span2" data-bind="value: value">
+               <span class="add-on" data-bind="text: unit"></span>
+            </div>
+            <!-- /ko -->
+         </div>
+       </div>
+       <div class="control-group">
+         <div class="controls">
+             <button class="btn btn-block" data-bind="click: executeMacro" data-dismiss="modal">
+                <i class="icon-cross"></i> {{ _('OK') }}
+             </button>
+         </div>
+       </div>
+   </div>
+</div>

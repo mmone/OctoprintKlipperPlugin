@@ -12,6 +12,7 @@ $(function() {
         self.loginState = parameters[1];
         self.connectionState = parameters[2];
         self.levelingViewModel = parameters[3];
+        self.paramMacroViewModel = parameters[4];
         
         self.shortStatus = ko.observable();
         self.logMessages = ko.observableArray();
@@ -52,8 +53,22 @@ $(function() {
            });
         }
         
-        self.executeMacro = function(macro) {	
-           OctoPrint.control.sendGcode(macro.macro());	
+        self.executeMacro = function(macro) {
+           var paramObjRegex = /{(.*?)}/g;
+           
+           if (macro.macro().match(paramObjRegex) == null) {
+              OctoPrint.control.sendGcode(
+                 macro.macro().replace(/(?:\r\n|\r|\n)/g, " ")
+              );
+           } else {
+              self.paramMacroViewModel.process(macro);
+              
+              var dialog = $("#klipper_macro_dialog");
+              dialog.modal({
+                 show: 'true',
+                 backdrop: 'static'
+              });
+           }
         }
      
         self.onGetStatus = function() {
@@ -97,7 +112,13 @@ $(function() {
 
     OCTOPRINT_VIEWMODELS.push({
         construct: KlipperViewModel,
-        dependencies: ["settingsViewModel", "loginStateViewModel", "connectionViewModel", "klipperLevelingViewModel"],
+        dependencies: [
+           "settingsViewModel",
+           "loginStateViewModel",
+           "connectionViewModel",
+           "klipperLevelingViewModel",
+           "klipperMacroDialogViewModel"
+        ],
         elements: ["#tab_plugin_klipper_main", "#sidebar_plugin_klipper", "#navbar_plugin_klipper"]
     });
 });

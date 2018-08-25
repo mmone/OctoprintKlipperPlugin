@@ -6,6 +6,7 @@
   <li><a href="#conf" data-toggle="tab">Klipper Configuration</a></li>
 </ul>
 <div class="tab-content">
+  <!-- Basics -->
   <div class="tab-pane active" id="basic">
     <div class="control-group">
         <label class="control-label">{{ _('Serial Port') }}</label>
@@ -38,6 +39,7 @@
         </div>
     </div>
   </div>
+  <!-- Macros -->
   <div class="tab-pane" id="macros">
     <div class="control-group">
        <div class="controls">
@@ -69,7 +71,7 @@
                   </div>
                 </div>
            </div>
-           <label class="control-label">{{ _('GCODE') }}</label>
+           <label class="control-label">{{ _('Command') }}</label>
            <div class="controls">
                <div class="row-fluid">
                  <div class="span8">
@@ -86,7 +88,21 @@
         <a href='#' data-bind='click: addMacro' class="fa fa-plus-circle"></a> {{ _('Add Macro') }}
       </div>
     </div>
+    <div class="control-group">
+        <span class="help-block">
+         To show a dialog that asks for parameters you can write your macro like in the following example:<br>
+        </span>
+    </div>
+    <div class="control-group">
+<pre>
+PID_CALIBRATE 
+HEATER={label:Heater, default:extruder, options:extruder|extruder1}
+TARGET={label:Temperature, unit:°C, default:190}
+WRITE_FILE={label:WriteFile, default:0, options:0|1}
+</pre>
+     </div>
   </div>
+  <!-- Leveling -->
   <div class="tab-pane" id="level">
     <div class="control-group">
        <span class="help-block">
@@ -164,6 +180,7 @@
      </div>
    </div>
   </div>
+  <!-- Klipper Conf -->
   <div class="tab-pane" id="conf">
    <div class="control-group">
       <textarea id="plugin-klipper-config" rows="31" class="block" data-bind="value: settings.settings.plugins.klipper.config"></textarea>

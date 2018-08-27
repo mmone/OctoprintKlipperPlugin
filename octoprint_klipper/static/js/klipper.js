@@ -98,7 +98,11 @@ $(function() {
         }
 
         self.logMessage = function(timestamp, type, message) {
-           self.logMessages.push({time: timestamp, type: type, msg: message});
+           self.logMessages.push({
+              time: timestamp,
+              type: type,
+              msg: message.replace(/\n/gi, "<br>")}
+           );
         }
         
         self.onClearLog = function() {
